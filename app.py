@@ -4,11 +4,13 @@ Starten:  streamlit run app.py
 """
 
 import html
+import time
 
 import streamlit as st
 
 from src import pipeline
 from src.config import APP_VERSIE, ESCO_VERSIE, VOORBEELD_MAP
+from src.demo import laad_vooraf_berekend, zoek_voorbeeld
 from src.esco import EscoFout
 from src.export import is_definitief, naar_csv, naar_json
 from src.llm_providers import LLMFout, kies_provider
@@ -210,6 +212,13 @@ def toon_resultaat(profiel: Profiel) -> None:
 
 with st.sidebar:
     st.header("Instellingen")
+    demo_modus = st.toggle(
+        "Demo-modus",
+        key="demo_modus",
+        help="Toont vooraf berekende resultaten voor de drie voorbeeldvacatures, zonder live AI- of ESCO-aanroepen.",
+    )
+    if demo_modus:
+        st.caption("Demo-modus staat aan: alleen de drie voorbeeldvacatures werken.")
     try:
         provider = kies_provider()
         st.write(f"**AI-model:** {provider.omschrijving}")
@@ -237,10 +246,25 @@ with rechts:
 with links:
     st.text_area("Vacaturetekst", key="vacature", height=320, placeholder="Plak hier de vacaturetekst…")
 
-if st.button("Analyseer vacature", type="primary", disabled=provider is None):
+if st.button("Analyseer vacature", type="primary", disabled=provider is None and not demo_modus):
     tekst = st.session_state.get("vacature", "").strip()
     if len(tekst) < 50:
         st.warning("Plak eerst een vacaturetekst (minimaal een paar zinnen).")
+    elif demo_modus:
+        naam = zoek_voorbeeld(tekst)
+        profiel = laad_vooraf_berekend(naam) if naam else None
+        if profiel is None:
+            st.warning(
+                "In de demo-modus werken alleen de drie voorbeeldvacatures (ongewijzigd). "
+                "Laad een voorbeeld, of zet de demo-modus uit voor een live analyse."
+            )
+        else:
+            with st.status("Bezig met analyseren (demo-modus)…", expanded=True) as status:
+                for i, stap in enumerate(pipeline.STAPPEN):
+                    status.write(f"Stap {i + 1} van {len(pipeline.STAPPEN)}: {stap}…")
+                    time.sleep(0.4)  # korte pauze zodat bezoekers de stappen kunnen volgen
+                status.update(label="Analyse klaar (vooraf berekend resultaat)", state="complete", expanded=False)
+            bewaar_resultaat(profiel)
     else:
         with st.status("Bezig met analyseren…", expanded=True) as status:
 
