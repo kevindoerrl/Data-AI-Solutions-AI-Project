@@ -1,0 +1,23 @@
+# Geheimen: NOOIT committen
+.env
+.streamlit/secrets.toml
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Cache van ESCO-antwoorden (wordt vanzelf opnieuw opgebouwd)
+data/cache/
+
+# Lokale instellingen van Claude Code
+.claude/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini

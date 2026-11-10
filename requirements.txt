@@ -1,0 +1,12 @@
+# Interface
+streamlit>=1.40,<2
+# Data en validatie
+pydantic>=2.7,<3
+pyyaml>=6.0
+python-dotenv>=1.0
+requests>=2.32
+# LLM-providers (alleen nodig als je ze gebruikt; mock werkt zonder)
+anthropic>=0.80
+openai>=1.50
+# Tests
+pytest>=8.0

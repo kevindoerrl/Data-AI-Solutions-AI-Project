@@ -1,0 +1,77 @@
+# Classificatiekader: wanneer is een skill "instroom" en wanneer "on the job"?
+#
+# Dit bestand kan het team aanpassen ZONDER code te wijzigen.
+# - "criteria" worden letterlijk aan het AI-model meegegeven als uitleg.
+# - "signaalwoorden" worden door de regels in src/classify.py herkend
+#   (hoofdletters maken niet uit; een woord matcht ook midden in een zin).
+#
+# Belangrijkste regel van het project: BIJ TWIJFEL ALTIJD "on_the_job".
+# Een onterechte instroomeis sluit werkzoekenden uit.
+
+standaard_bij_twijfel: on_the_job
+
+categorieen:
+  instroom:
+    naam: Instroom
+    uitleg: Nodig bij de start van het werk.
+    criteria:
+      - naam: Wettelijk of formeel vereist
+        omschrijving: Diploma, certificaat, rijbewijs, VCA, BIG-registratie.
+        signaal: '"in bezit van", "vereist", "verplicht"; kwalificatie gekoppeld aan beroep'
+      - naam: Veiligheidskritisch
+        omschrijving: Direct nodig om zelfstandig en veilig te kunnen starten.
+        signaal: werken met gevaarlijke stoffen, machines, zorg aan cliënten
+      - naam: Basisvaardigheden met lange leertijd
+        omschrijving: Taalniveau, rekenvaardigheid, digitale basisvaardigheden; transversale skills.
+        signaal: taalniveau, rekenen, ESCO transversale skills
+    signaalwoorden:
+      - vereist
+      - verplicht
+      - in bezit van
+      - beschikt over
+      - je hebt een
+      - diploma
+      - certificaat
+      - rijbewijs
+      - vca
+      - big-registratie
+      - big-geregistreerd
+      - nen 3140
+      - nen3140
+      - must
+      - noodzakelijk
+      - minimaal mbo
+
+  on_the_job:
+    naam: On the job
+    uitleg: Kan op de werkvloer geleerd worden.
+    criteria:
+      - naam: Organisatie- of systeemspecifiek
+        omschrijving: Namen van interne systemen, werkwijzen van deze organisatie.
+        signaal: '"je wordt ingewerkt in…", namen van systemen'
+      - naam: Aan te leren in de inwerkperiode
+        omschrijving: Indicatief binnen 3 maanden te leren.
+        signaal: '"pré", "affiniteit met", "wij leiden je op"; vaak optionele ESCO-skills'
+      - naam: Beroepsspecifieke verdieping
+        omschrijving: Wordt op de werkvloer opgebouwd; ervaringseisen zonder formele kwalificatie.
+        signaal: '"ervaring met … is mooi meegenomen"'
+    signaalwoorden:
+      - pré
+      - pre
+      - een plus
+      - mooi meegenomen
+      - affiniteit met
+      - wij leiden je op
+      - we leiden je op
+      - leiden je op
+      - je wordt ingewerkt
+      - word je ingewerkt
+      - inwerkperiode
+      - interne opleiding
+      - leer je bij ons
+      - leer je op de werkvloer
+      - training on the job
+      - geen ervaring nodig
+      - ervaring is niet nodig
+      - bereid om te leren
+      - je krijgt een opleiding
