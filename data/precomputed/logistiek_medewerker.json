@@ -1,62 +1,217 @@
 {
   "functietitel": "Logistiek medewerker",
   "beroep": {
-    "uri": "http://data.europa.eu/esco/occupation/c8b296be-54ae-48cf-be21-031fa8457937",
-    "label": "logistiek medewerker",
+    "uri": "http://data.europa.eu/esco/occupation/bea705fe-06ac-4147-b8e0-6e8ac1208d8f",
+    "label": "magazijnmedewerker",
     "essentiele_skills": [
       {
-        "uri": "http://data.europa.eu/esco/skill/7c3865d1-e5a9-4043-a7a4-2e9e30468c0b",
-        "label": "routineactiviteiten op kantoor uitvoeren",
+        "uri": "http://data.europa.eu/esco/skill/078861f5-b901-48a5-951e-a3ad0a4fa0bd",
+        "label": "magazijnmaterialen gebruiken",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/cf579543-272b-43c8-b942-555836ae4241",
-        "label": "beginselen van de leveringsketen",
+        "uri": "http://data.europa.eu/esco/skill/b3b2547b-5c37-4d21-8ee5-f01b6bd672ae",
+        "label": "instructies inzake voorraadbeheer volgen",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/71dde84c-0058-4c52-a556-523369333db8",
-        "label": "kantoorsystemen gebruiken",
+        "uri": "http://data.europa.eu/esco/skill/af2e97dc-fa66-421e-a793-ba4e4afa2dad",
+        "label": "soorten verpakkingen die worden gebruikt bij industrieel vervoer",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/4bd6e2ad-bf69-4198-b3ac-3baabd9da46e",
-        "label": "managers ondersteunen",
+        "uri": "http://data.europa.eu/esco/skill/fc511e12-fe90-40a0-bec8-227abb5e4255",
+        "label": "mondelinge instructies volgen",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/3e04e39d-9eb6-4167-ad2d-e3413f647e4e",
-        "label": "zakelijke documenten ordenen",
+        "uri": "http://data.europa.eu/esco/skill/af582ee4-bbc8-436c-96f2-df0cb2049f5d",
+        "label": "coderingssysteem voor producten",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88",
-        "label": "bedrijfsonderzoek voeren",
+        "uri": "http://data.europa.eu/esco/skill/4ad83664-21a9-4f96-8834-0fc8f671be9c",
+        "label": "bestellingen verzenden",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/cf310cff-0d28-4dbc-9dbb-cc500a3196c2",
-        "label": "kantoorsoftware",
+        "uri": "http://data.europa.eu/esco/skill/b1e4b6b3-c32e-426f-91a1-41b8adac086c",
+        "label": "goederen vastmaken",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/dccbdbb8-7266-4fb4-a4cf-29056f102f12",
-        "label": "begroting maken voor financiële behoeften",
+        "uri": "http://data.europa.eu/esco/skill/c0b74374-39ff-43cf-a0a9-6220c7ec5097",
+        "label": "efficiëntieplannen voor logistieke operaties implementeren",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/1973c966-f236-40c9-b2d4-5d71a89019be",
-        "label": "software voor spreadsheets gebruiken",
+        "uri": "http://data.europa.eu/esco/skill/110d7aa3-e44e-4cce-a927-8d4de615f3d9",
+        "label": "afval sorteren",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/fb39389b-07d5-439f-948b-6c6e58c0384f",
+        "label": "vervoer van goederen vanuit opslagfaciliteiten beheren",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/ee5e2297-39cc-4ed6-89e5-d58016118a7f",
+        "label": "bestellingen selecteren voor verzending",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/9685849e-f2b4-490f-85b5-20fc6fff9fda",
+        "label": "markeermiddelen in magazijnen gebruiken",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/139a8761-e26c-4c19-b446-a2568c9eb578",
+        "label": "industriële containers reinigen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/055ff233-6569-43db-9f95-a4b03dca97da",
+        "label": "gegevensregistratiesystemen voor magazijnen gebruiken",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/2e69f3a4-e0be-4990-aff7-facc1b6c6860",
+        "label": "goederen koppelen aan de gepaste verpakking volgens de veiligheidsprocedures",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/8269dc3d-50ee-46b5-a742-a7d2cb7d90bb",
+        "label": "controleren op beschadigde producten",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/d18408c1-c2ba-4835-9ee0-352705d807d0",
+        "label": "weegapparatuur gebruiken",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/4f1b6304-f54a-42f0-9604-5427a28d240f",
+        "label": "schoonmaaktaken uitvoeren",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/f8cd217b-b870-42aa-9bbe-d36b672cbb65",
+        "label": "apparatuur om pakketten te verwerken bedienen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/3ab2b4be-e304-4c3c-98f5-ce0620218bc6",
+        "label": "helpen bij het verplaatsen van zware vrachten",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/fd9c8437-6e20-47b5-8508-f23f442446c2",
+        "label": "pallets laden",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/2cae39d6-78c2-4ce3-bee8-628504371463",
+        "label": "goederen ontvangen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/57fb98c5-6862-4969-8bf4-a74ff14c4750",
+        "label": "papierwerk met betrekking tot magazijnvoorraden afhandelen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/415abd43-e8e5-4643-b5da-5f11307af57a",
+        "label": "verschillende communicatiekanalen gebruiken",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/53b12b36-d27d-4ae9-8681-36d1cf697939",
+        "label": "riggingmateriaal gebruiken",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/e1f5c539-7c93-49ee-917d-a24e0d887686",
+        "label": "beheersing van uitgaven",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/74aa45cf-175f-47ef-9978-d9de437d92ba",
+        "label": "alert blijven",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/d15ce60f-ddab-41ce-ba56-398451b77b60",
+        "label": "beschikken over computervaardigheden",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/4e7b2c61-aa42-404c-995f-32281b818923",
+        "label": "ruimtelijk bewustzijn hebben",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/f3f15fe4-3e74-4cc2-b0ac-71a330885e3e",
+        "label": "beschadigde goederen voor verzending identificeren",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/ab2bb44a-3956-4028-8715-8b70b1960b99",
+        "label": "zware gewichten tillen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/5d2e82cc-5943-4218-a459-a1956fad2b63",
+        "label": "inventaris van magazijnen beheren",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/de804504-bd5c-465d-b54f-9da299d8ee90",
+        "label": "controlesystemen voor voorraad onderhouden",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/3c73898b-04a6-4e3a-b84a-3a032277c916",
+        "label": "technieken toepassen om goederen in containers te stapelen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/23db1cab-e565-4a90-89f8-3a8685a20029",
+        "label": "fysieke toestand van magazijnen onderhouden",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/77397348-2ce4-4edb-81cc-9eb19f6a3ed7",
+        "label": "producten laden voor verzending",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/5b2acf48-7746-42d9-861f-5445e7ea6f48",
+        "label": "verzenddocumenten afhandelen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/3d086228-d7fc-4c23-972a-22b7d44a6173",
+        "label": "goederen stapelen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/44f6a65f-6be7-4818-9a66-73908797283f",
+        "label": "voorraadniveaus bewaken",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/85aa1871-db96-42f7-801f-c39f924de2d7",
+        "label": "diensten van werknemers plannen",
         "hergebruik": ""
       }
     ]
   },
   "skills": [
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/28cb374e-6261-4133-8371-f9a5470145da",
-      "esco_label": "heftrucks bedienen",
-      "uitspraak": "Je laadt en lost vrachtwagens met een elektrische pallettruck en een heftruck",
-      "bronzin": "Je laadt en lost vrachtwagens met een elektrische pallettruck en een heftruck.",
+      "esco_uri": "http://data.europa.eu/esco/skill/2cae39d6-78c2-4ce3-bee8-628504371463",
+      "esco_label": "goederen ontvangen",
+      "uitspraak": "goederen ontvangen",
+      "bronzin": "Je ontvangt en controleert binnenkomende goederen.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
       "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
@@ -64,9 +219,58 @@
       "door_mens_bevestigd": false
     },
     {
+      "esco_uri": "http://data.europa.eu/esco/skill/e5d1039d-f206-4031-abdd-cd4d222d9f87",
+      "esco_label": "gelijktijdig meerdere orders uitvoeren",
+      "uitspraak": "gelijktijdig meerdere orders uitvoeren",
+      "bronzin": "Je verzamelt orders met een handscanner (order picking).",
+      "signaalwoorden": [],
+      "categorie": "on_the_job",
+      "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
+      "betrouwbaarheid": "laag",
+      "door_mens_bevestigd": false
+    },
+    {
+      "esco_uri": "http://data.europa.eu/esco/skill/28cb374e-6261-4133-8371-f9a5470145da",
+      "esco_label": "heftrucks bedienen",
+      "uitspraak": "heftrucks bedienen",
+      "bronzin": "Een geldig heftruckcertificaat is vereist.",
+      "signaalwoorden": [
+        "vereist"
+      ],
+      "categorie": "instroom",
+      "toelichting": "De vacature noemt dit als harde eis (signaalwoord in de bronzin).",
+      "betrouwbaarheid": "midden",
+      "door_mens_bevestigd": false
+    },
+    {
+      "esco_uri": "http://data.europa.eu/esco/skill/f60416d5-2d98-4401-ba0d-b92b53e01d86",
+      "esco_label": "gegevens over voorraden bijhouden",
+      "uitspraak": "gegevens over voorraden bijhouden",
+      "bronzin": "Je houdt de voorraad bij in ons magazijnsysteem WMS-Flow.",
+      "signaalwoorden": [],
+      "categorie": "on_the_job",
+      "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
+      "betrouwbaarheid": "laag",
+      "door_mens_bevestigd": false
+    },
+    {
+      "esco_uri": "http://data.europa.eu/esco/skill/7c821387-b428-4f75-b5a7-7b038aa81cfd",
+      "esco_label": "een magazijnbeheersysteem gebruiken",
+      "uitspraak": "een magazijnbeheersysteem gebruiken",
+      "bronzin": "Wij leiden je op in het werken met de handscanner en WMS-Flow.",
+      "signaalwoorden": [
+        "wij leiden je op",
+        "leiden je op"
+      ],
+      "categorie": "on_the_job",
+      "toelichting": "De vacature geeft aan dat dit geleerd kan worden of een pré is.",
+      "betrouwbaarheid": "midden",
+      "door_mens_bevestigd": false
+    },
+    {
       "esco_uri": "http://data.europa.eu/esco/skill/198b614d-a9af-46f5-b3fd-2672b401dd8e",
       "esco_label": "gezondheid en veiligheid op de werkplek",
-      "uitspraak": "Je zorgt voor een veilige en opgeruimde werkplek",
+      "uitspraak": "gezondheid en veiligheid op de werkplek",
       "bronzin": "Je zorgt voor een veilige en opgeruimde werkplek.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
@@ -75,9 +279,9 @@
       "door_mens_bevestigd": false
     },
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/cad4f44b-28a8-4448-86e5-7389e5ebf3eb",
-      "esco_label": "Nederlands",
-      "uitspraak": "Je spreekt en begrijpt Nederlands op basisniveau",
+      "esco_uri": "http://data.europa.eu/esco/skill/c44b765b-76fb-4a16-be7e-9925beee072c",
+      "esco_label": "mondeling in het Nederlands communiceren",
+      "uitspraak": "mondeling in het Nederlands communiceren",
       "bronzin": "Je spreekt en begrijpt Nederlands op basisniveau, zodat je veiligheidsinstructies kunt volgen.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
@@ -86,22 +290,20 @@
       "door_mens_bevestigd": false
     },
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/e5a6e1e0-1b07-4432-83ba-77d593b2cb47",
-      "esco_label": "SAS Data Management",
-      "uitspraak": "Ervaring met een warehouse management systeem is een pré",
-      "bronzin": "Ervaring met een warehouse management systeem is een pré.",
-      "signaalwoorden": [
-        "pré"
-      ],
+      "esco_uri": "http://data.europa.eu/esco/skill/d15f8745-28f8-4abf-a7b6-6cb8a304efd2",
+      "esco_label": "stressbestendig zijn",
+      "uitspraak": "stressbestendig zijn",
+      "bronzin": "Je kunt goed samenwerken in een team en bent stressbestendig in de piekuren.",
+      "signaalwoorden": [],
       "categorie": "on_the_job",
-      "toelichting": "De vacature geeft aan dat dit geleerd kan worden of een pré is.",
-      "betrouwbaarheid": "midden",
+      "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
+      "betrouwbaarheid": "laag",
       "door_mens_bevestigd": false
     },
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/e360f126-5c8d-4398-a746-a53f9ec59b7f",
-      "esco_label": "structuur van rijbewijzen",
-      "uitspraak": "Een rijbewijs B is mooi meegenomen",
+      "esco_uri": "http://data.europa.eu/esco/skill/2a82241a-216e-44d8-bb50-6b9a0ef82084",
+      "esco_label": "voertuigen besturen",
+      "uitspraak": "voertuigen besturen",
       "bronzin": "Een rijbewijs B is mooi meegenomen.",
       "signaalwoorden": [
         "rijbewijs",
@@ -115,46 +317,11 @@
   ],
   "niet_gekoppeld": [
     {
-      "uitspraak": "Je ontvangt en controleert binnenkomende goederen",
-      "bronzin": "Je ontvangt en controleert binnenkomende goederen.",
-      "signaalwoorden": []
-    },
-    {
-      "uitspraak": "Je verzamelt orders met een handscanner",
-      "bronzin": "Je verzamelt orders met een handscanner (order picking).",
-      "signaalwoorden": []
-    },
-    {
-      "uitspraak": "Je houdt de voorraad bij in ons magazijnsysteem WMS-Flow",
-      "bronzin": "Je houdt de voorraad bij in ons magazijnsysteem WMS-Flow.",
-      "signaalwoorden": []
-    },
-    {
-      "uitspraak": "Een geldig heftruckcertificaat is vereist",
-      "bronzin": "Een geldig heftruckcertificaat is vereist.",
-      "signaalwoorden": [
-        "vereist"
-      ]
-    },
-    {
       "uitspraak": "VCA-basis is verplicht",
       "bronzin": "VCA-basis is verplicht (of je haalt het in de eerste maand via ons).",
       "signaalwoorden": [
         "verplicht",
         "vca"
-      ]
-    },
-    {
-      "uitspraak": "goed samenwerken in een team en bent stressbestendig in de piekuren",
-      "bronzin": "Je kunt goed samenwerken in een team en bent stressbestendig in de piekuren.",
-      "signaalwoorden": []
-    },
-    {
-      "uitspraak": "het werken met de handscanner en WMS-Flow",
-      "bronzin": "Wij leiden je op in het werken met de handscanner en WMS-Flow.",
-      "signaalwoorden": [
-        "wij leiden je op",
-        "leiden je op"
       ]
     },
     {
@@ -172,48 +339,198 @@
   ],
   "mogelijk_ontbrekend": [
     {
-      "uri": "http://data.europa.eu/esco/skill/7c3865d1-e5a9-4043-a7a4-2e9e30468c0b",
-      "label": "routineactiviteiten op kantoor uitvoeren",
+      "uri": "http://data.europa.eu/esco/skill/078861f5-b901-48a5-951e-a3ad0a4fa0bd",
+      "label": "magazijnmaterialen gebruiken",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/cf579543-272b-43c8-b942-555836ae4241",
-      "label": "beginselen van de leveringsketen",
+      "uri": "http://data.europa.eu/esco/skill/b3b2547b-5c37-4d21-8ee5-f01b6bd672ae",
+      "label": "instructies inzake voorraadbeheer volgen",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/71dde84c-0058-4c52-a556-523369333db8",
-      "label": "kantoorsystemen gebruiken",
+      "uri": "http://data.europa.eu/esco/skill/af2e97dc-fa66-421e-a793-ba4e4afa2dad",
+      "label": "soorten verpakkingen die worden gebruikt bij industrieel vervoer",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/4bd6e2ad-bf69-4198-b3ac-3baabd9da46e",
-      "label": "managers ondersteunen",
+      "uri": "http://data.europa.eu/esco/skill/fc511e12-fe90-40a0-bec8-227abb5e4255",
+      "label": "mondelinge instructies volgen",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/3e04e39d-9eb6-4167-ad2d-e3413f647e4e",
-      "label": "zakelijke documenten ordenen",
+      "uri": "http://data.europa.eu/esco/skill/af582ee4-bbc8-436c-96f2-df0cb2049f5d",
+      "label": "coderingssysteem voor producten",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/0839eea4-c57b-4c14-b19b-923fbedb5d88",
-      "label": "bedrijfsonderzoek voeren",
+      "uri": "http://data.europa.eu/esco/skill/4ad83664-21a9-4f96-8834-0fc8f671be9c",
+      "label": "bestellingen verzenden",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/cf310cff-0d28-4dbc-9dbb-cc500a3196c2",
-      "label": "kantoorsoftware",
+      "uri": "http://data.europa.eu/esco/skill/b1e4b6b3-c32e-426f-91a1-41b8adac086c",
+      "label": "goederen vastmaken",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/dccbdbb8-7266-4fb4-a4cf-29056f102f12",
-      "label": "begroting maken voor financiële behoeften",
+      "uri": "http://data.europa.eu/esco/skill/c0b74374-39ff-43cf-a0a9-6220c7ec5097",
+      "label": "efficiëntieplannen voor logistieke operaties implementeren",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/1973c966-f236-40c9-b2d4-5d71a89019be",
-      "label": "software voor spreadsheets gebruiken",
+      "uri": "http://data.europa.eu/esco/skill/110d7aa3-e44e-4cce-a927-8d4de615f3d9",
+      "label": "afval sorteren",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/fb39389b-07d5-439f-948b-6c6e58c0384f",
+      "label": "vervoer van goederen vanuit opslagfaciliteiten beheren",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/ee5e2297-39cc-4ed6-89e5-d58016118a7f",
+      "label": "bestellingen selecteren voor verzending",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/9685849e-f2b4-490f-85b5-20fc6fff9fda",
+      "label": "markeermiddelen in magazijnen gebruiken",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/139a8761-e26c-4c19-b446-a2568c9eb578",
+      "label": "industriële containers reinigen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/055ff233-6569-43db-9f95-a4b03dca97da",
+      "label": "gegevensregistratiesystemen voor magazijnen gebruiken",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/2e69f3a4-e0be-4990-aff7-facc1b6c6860",
+      "label": "goederen koppelen aan de gepaste verpakking volgens de veiligheidsprocedures",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/8269dc3d-50ee-46b5-a742-a7d2cb7d90bb",
+      "label": "controleren op beschadigde producten",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/d18408c1-c2ba-4835-9ee0-352705d807d0",
+      "label": "weegapparatuur gebruiken",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/4f1b6304-f54a-42f0-9604-5427a28d240f",
+      "label": "schoonmaaktaken uitvoeren",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/f8cd217b-b870-42aa-9bbe-d36b672cbb65",
+      "label": "apparatuur om pakketten te verwerken bedienen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/3ab2b4be-e304-4c3c-98f5-ce0620218bc6",
+      "label": "helpen bij het verplaatsen van zware vrachten",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/fd9c8437-6e20-47b5-8508-f23f442446c2",
+      "label": "pallets laden",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/57fb98c5-6862-4969-8bf4-a74ff14c4750",
+      "label": "papierwerk met betrekking tot magazijnvoorraden afhandelen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/415abd43-e8e5-4643-b5da-5f11307af57a",
+      "label": "verschillende communicatiekanalen gebruiken",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/53b12b36-d27d-4ae9-8681-36d1cf697939",
+      "label": "riggingmateriaal gebruiken",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/e1f5c539-7c93-49ee-917d-a24e0d887686",
+      "label": "beheersing van uitgaven",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/74aa45cf-175f-47ef-9978-d9de437d92ba",
+      "label": "alert blijven",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/d15ce60f-ddab-41ce-ba56-398451b77b60",
+      "label": "beschikken over computervaardigheden",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/4e7b2c61-aa42-404c-995f-32281b818923",
+      "label": "ruimtelijk bewustzijn hebben",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/f3f15fe4-3e74-4cc2-b0ac-71a330885e3e",
+      "label": "beschadigde goederen voor verzending identificeren",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/ab2bb44a-3956-4028-8715-8b70b1960b99",
+      "label": "zware gewichten tillen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/5d2e82cc-5943-4218-a459-a1956fad2b63",
+      "label": "inventaris van magazijnen beheren",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/de804504-bd5c-465d-b54f-9da299d8ee90",
+      "label": "controlesystemen voor voorraad onderhouden",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/3c73898b-04a6-4e3a-b84a-3a032277c916",
+      "label": "technieken toepassen om goederen in containers te stapelen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/23db1cab-e565-4a90-89f8-3a8685a20029",
+      "label": "fysieke toestand van magazijnen onderhouden",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/77397348-2ce4-4edb-81cc-9eb19f6a3ed7",
+      "label": "producten laden voor verzending",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/5b2acf48-7746-42d9-861f-5445e7ea6f48",
+      "label": "verzenddocumenten afhandelen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/3d086228-d7fc-4c23-972a-22b7d44a6173",
+      "label": "goederen stapelen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/44f6a65f-6be7-4818-9a66-73908797283f",
+      "label": "voorraadniveaus bewaken",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/85aa1871-db96-42f7-801f-c39f924de2d7",
+      "label": "diensten van werknemers plannen",
       "hergebruik": ""
     }
   ],
@@ -233,7 +550,7 @@
   ],
   "schone_tekst": "Logistiek medewerker (32-40 uur) – Distributiecentrum Waalhaven\n\nOver ons\nTransHaven Logistics is een fictief distributiecentrum in de Rotterdamse haven. Vanuit ons magazijn leveren we dagelijks duizenden orders aan winkels in de Randstad.\n\nWat ga je doen?\n- Je ontvangt en controleert binnenkomende goederen.\n- Je verzamelt orders met een handscanner (order picking).\n- Je laadt en lost vrachtwagens met een elektrische pallettruck en een heftruck.\n- Je houdt de voorraad bij in ons magazijnsysteem WMS-Flow.\n- Je zorgt voor een veilige en opgeruimde werkplek.\n\nWat vragen wij?\n- Een geldig heftruckcertificaat is vereist.\n- VCA-basis is verplicht (of je haalt het in de eerste maand via ons).\n- Je spreekt en begrijpt Nederlands op basisniveau, zodat je veiligheidsinstructies kunt volgen.\n- Je kunt goed samenwerken in een team en bent stressbestendig in de piekuren.\n- Ervaring met een warehouse management systeem is een pré.\n- Een rijbewijs B is mooi meegenomen.\n\nWat bieden wij?\n- Wij leiden je op in het werken met de handscanner en WMS-Flow.\n- Een inwerkperiode van vier weken met een vaste buddy.\n- Een vast contract na zes maanden bij goed functioneren.\n\nInteresse?\nNeem contact op met [contactpersoon] via [e-mailadres] of bel [telefoonnummer].\n",
   "metadata": {
-    "datum": "2026-11-10T10:29:01",
+    "datum": "2026-11-10T11:09:09",
     "model": "mock/mock-regels-v1",
     "esco_versie": "v1.2.0",
     "app_versie": "0.1.0"

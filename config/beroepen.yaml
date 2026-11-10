@@ -1,0 +1,24 @@
+# Synoniemen voor beroepsherkenning (zonder AI).
+#
+# Sommige Nederlandse functietitels vinden in ESCO niet het juiste beroep.
+# Hier zeg je: als de functietitel dit woord bevat, zoek dan op dit ESCO-beroep.
+# Staat het ESCO-beroep met precies die naam in de zoekresultaten, dan wordt dat gekozen;
+# anders de eerste zoekhit.
+#
+# Het team kan deze lijst aanvullen zonder code te wijzigen.
+# Controleer elk nieuw beroep op https://esco.ec.europa.eu/nl/classification/occupation_main
+
+synoniemen:
+  # "logistiek medewerker" is in ESCO een kantoorfunctie (administratie van de leveringsketen).
+  # Een logistiek medewerker in een magazijn of distributiecentrum past beter bij:
+  logistiek medewerker: magazijnmedewerker
+  magazijn: magazijnmedewerker
+  orderpicker: orderpicker
+
+  # ESCO kent geen "verzorgende IG". De eerste zoekhit is "thuiszorgmedewerker".
+  # "verpleeghulp" (ISCO 5321, zorg in verpleeg- en verzorgingshuizen) ligt dichter bij het werk.
+  # Laat het team dit valideren met de opdrachtgever.
+  verzorgende ig: verpleeghulp
+  verzorgende-ig: verpleeghulp
+
+  elektromonteur: monteur elektrische installaties

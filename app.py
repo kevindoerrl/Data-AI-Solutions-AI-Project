@@ -127,7 +127,9 @@ def toon_resultaat(profiel: Profiel) -> None:
     st.markdown(f"**{len(profiel.skills)} skills: {len(instroom)} instroom, {len(otj)} on the job**")
 
     open_eisen = [s for s in instroom if not s.door_mens_bevestigd]
-    if open_eisen:
+    if not instroom:
+        st.success("Geen instroomeisen om te controleren. Het profiel is definitief.", icon="✅")
+    elif open_eisen:
         st.info(
             f"Nog {len(open_eisen)} instroomeis(en) te controleren. Bevestig elke eis of zet hem om naar "
             "on the job. Pas daarna is het profiel definitief.",

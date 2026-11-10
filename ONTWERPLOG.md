@@ -44,15 +44,16 @@ Per versie: welk model, welke prompts, welke ESCO-versie, welke aannames en keuz
 - "Indicatief < 3 maanden" uit het kader wordt niet berekend; het model weegt het mee via de prompt.
 
 ### Bekende beperkingen (gevonden tijdens het bouwen)
-- **Beroep "Verzorgende IG"** → de eerste ESCO-hit is *thuiszorgmedewerker*. ESCO heeft geen beroep met precies die naam.
-- **Beroep "Logistiek medewerker"** → ESCO *logistiek medewerker* is een **kantoorfunctie** (essentiële skills zoals "kantoorsystemen gebruiken"), geen magazijnfunctie. De lijst "mogelijk ontbrekende skills" is daardoor misleidend. *Magazijnmedewerker* of *pakhuismedewerker* zou beter passen.
-- **De mock-provider** koppelt op woordoverlap en geeft dus vaak vreemde koppelingen ("rijbewijs" → "structuur van rijbewijzen"). De mock is alleen bedoeld voor tests en als technische terugvaloptie, niet voor de inhoud.
+- **Beroep "Verzorgende IG"**: de eerste ESCO-hit is *thuiszorgmedewerker*; ESCO heeft geen beroep met precies die naam. *Opgelost met `config/beroepen.yaml`*: dit wordt nu *verpleeghulp*. Laat het team die keuze valideren met de opdrachtgever.
+- **Beroep "Logistiek medewerker"**: ESCO *logistiek medewerker* is een **kantoorfunctie**. *Opgelost met `config/beroepen.yaml`*: dit wordt nu *magazijnmedewerker*. Daarbij krijgt een exacte naam in de zoekresultaten voorrang op de eerste hit.
+- **De mock-provider** koppelt op woordoverlap, met een kleine trefwoordenlijst voor de pilotberoepen (`_MOCK_TREFWOORDEN` in `src/llm_providers.py`). Voor de drie voorbeelden geeft dat logische koppelingen, maar voor andere vacatures blijft de kwaliteit laag. Diploma's en registraties (Verzorgende IG, BIG) zijn geen ESCO-skills en blijven daarom ongekoppeld, waardoor de verzorgende-vacature in de mock 0 instroomeisen heeft.
 - **De demo-resultaten** in `data/precomputed/` zijn met de mock gemaakt. **Voor het symposium opnieuw maken met het echte model** (`scripts/precompute.py --provider anthropic`).
 - De ESCO-zoekfunctie werkt op tekst. Lange uitspraken geven minder goede kandidaten dan korte (2 tot 8 woorden); daarom vraagt de extractieprompt om korte uitspraken.
 - De referentieset bevat nu 3 voorbeeldregels. De evaluatiecijfers zeggen pas iets als het team een echte, handmatig gelabelde set maakt.
 
 ### Vervolgstappen (bewust niet gebouwd in v1)
-- **Synoniemenlijst voor beroepen** in de config (bijv. "verzorgende ig" → "verzorgende in de individuele gezondheidszorg", "logistiek medewerker" → "magazijnmedewerker"), of een keuzemenu met de top 3 ESCO-beroepen. Dat lost de twee beroepsproblemen op zonder AI-model.
+- Een **keuzemenu met de top 3 ESCO-beroepen**, zodat de gebruiker het beroep kan corrigeren. De synoniemenlijst (`config/beroepen.yaml`) is in v0.1.0 al toegevoegd.
+- **Diploma's en certificaten** (Verzorgende IG, VCA, BIG) apart tonen als formele instroomeis, ook als er geen ESCO-skill bij hoort (bijvoorbeeld via ESCO-kwalificaties).
 - De ESCO-**transversale skills** en optionele skills (`hasOptionalSkill`) explicieter meewegen in de classificatie (nu krijgt het model alleen het hergebruikniveau mee).
 - Bronzin markeren in de vacaturetekst als het model de zin licht anders citeert (fuzzy matching).
 - CompetentNL-koppeling, andere talen, kandidaatmatching, accounts en een database vallen buiten de scope van v1.

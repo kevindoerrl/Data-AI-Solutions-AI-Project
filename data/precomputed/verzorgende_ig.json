@@ -1,62 +1,117 @@
 {
   "functietitel": "Verzorgende IG",
   "beroep": {
-    "uri": "http://data.europa.eu/esco/occupation/1391bdf9-bd61-4fb5-91ca-c29036ab2b60",
-    "label": "thuiszorgmedewerker",
+    "uri": "http://data.europa.eu/esco/occupation/87d0795a-d41f-47ee-979f-0ab7d73836e7",
+    "label": "verpleeghulp",
     "essentiele_skills": [
       {
-        "uri": "http://data.europa.eu/esco/skill/c662be22-f17a-4ba0-894f-d720b20c44cf",
-        "label": "afwassen",
+        "uri": "http://data.europa.eu/esco/skill/76395873-7fe2-4f9a-b4b6-9932f8cbd0b4",
+        "label": "klinische richtlijnen volgen",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/eacac7e2-4e88-4bd3-9797-1dd1922cd10a",
-        "label": "personen helpen zich aan te passen aan een lichamelijke beperking",
+        "uri": "http://data.europa.eu/esco/skill/9fcf9918-fdef-49c3-aedc-518eb1e7e1f5",
+        "label": "wetgeving in verband met gezondheidszorg naleven",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/562b1180-83e7-4041-8468-2f28d03b7893",
-        "label": "stoffen strijken",
+        "uri": "http://data.europa.eu/esco/skill/8168333b-8257-48f6-82c5-6b5128c21ecc",
+        "label": "mensgerichte zorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/b72395ea-623b-4204-abef-a67592b0781a",
-        "label": "kant-en-klaarmaaltijden bereiden",
+        "uri": "http://data.europa.eu/esco/skill/d429b19a-132f-44d3-971b-bb0ccd94f979",
+        "label": "verplegingswetenschap",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/b6b2e665-1085-4f4d-9973-e979721815d7",
-        "label": "klanten met bijzondere behoeften assisteren",
+        "uri": "http://data.europa.eu/esco/skill/13724e7d-b946-4773-915e-9621340237bc",
+        "label": "bijdragen aan de continuïteit van de gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/493a1805-6caa-4cda-8fd3-6495ec8ea451",
-        "label": "broodjes bereiden",
+        "uri": "http://data.europa.eu/esco/skill/7110bf9f-b245-4adc-9159-5081013fd64d",
+        "label": "communiceren in de gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/634865e0-2ec2-4b7f-bb7f-c196637f0f7b",
-        "label": "behoeften van oudere volwassenen",
+        "uri": "http://data.europa.eu/esco/skill/049c8caf-dd12-45fc-9bfa-b64051f32a19",
+        "label": "reageren op veranderende omstandigheden in de gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/941438bd-cc03-4326-91bf-677157dca170",
-        "label": "gebruikers van sociale diensten ondersteunen om thuis te wonen",
+        "uri": "http://data.europa.eu/esco/skill/24f980ba-b44f-4739-b563-205104c3190d",
+        "label": "basisondersteuning aan patiënten bieden",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/e0c6fdd1-336a-4e2f-91d1-ab4a2f9c385d",
-        "label": "bedden opmaken",
+        "uri": "http://data.europa.eu/esco/skill/c65aa043-98da-4136-9877-494e72d9e4cf",
+        "label": "communiceren met gebruikers van gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/eaa4cdc0-43e0-4388-9b8a-e2779218d10e",
-        "label": "eerste hulp",
+        "uri": "http://data.europa.eu/esco/skill/68088afb-3afd-4538-8e25-377a63f09666",
+        "label": "communiceren met verplegend personeel",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/0dcea846-04b4-4ffc-8c75-a35c991454b1",
-        "label": "reageren op noodsituaties",
+        "uri": "http://data.europa.eu/esco/skill/b9f16465-56a9-426b-a047-0f9f1f95ec92",
+        "label": "problemen kritisch behandelen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/98eb1f3b-3480-416b-bd4b-811946f7e347",
+        "label": "kwaliteitsnormen in verband met de uitoefening van gezondheidszorg naleven",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/e6bf6e73-230a-434c-97b2-a0c042a8b7ac",
+        "label": "duurzaamheidsbeginselen in de gezondheidszorg toepassen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/f7464f30-662b-4177-85a0-3df9693e9e58",
+        "label": "EHBO",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/2475cd27-8d6c-4318-a364-21395b23acba",
+        "label": "meeleven met gebruikers van gezondheidszorg",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/eba85523-6ad2-4cd9-9b27-a0b6a39b8cfa",
+        "label": "werken in multidisciplinaire gezondheidsteams",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/516e324b-03fc-4d3b-9986-e46e9834cd43",
+        "label": "grondbeginselen van verpleging implementeren",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/1023ac61-250f-4eef-b7a9-238cf071685f",
+        "label": "professionele zorg bieden bij verpleging",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/f98e06f5-a09a-4356-b6a8-d55a7d3c5356",
+        "label": "verpleegkundige zorg toepassen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/bccafecc-4d80-43d3-8c9f-aef382c3926f",
+        "label": "samenwerken met verplegend personeel",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/bcd2ce08-ba12-4d66-865f-f4ba36419707",
+        "label": "inclusie bevorderen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/6acf652c-33b2-4e28-8f79-1e553f255229",
+        "label": "verpleegkundige zorg plannen",
         "hergebruik": ""
       },
       {
@@ -65,68 +120,78 @@
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/ab89ad86-1098-44bb-9465-05af5624557c",
-        "label": "mensen vergezellen",
+        "uri": "http://data.europa.eu/esco/skill/d3b74d50-7fc9-4051-9335-58d129a4a064",
+        "label": "vitale functies van patiënten monitoren",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/f3a96be9-639d-43e0-aed5-c596980798d6",
-        "label": "reizigers met een handicap helpen",
+        "uri": "http://data.europa.eu/esco/skill/0450eaee-1a00-4622-8f4e-5356fce816d2",
+        "label": "hygiëne in de gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/04838ae5-a737-48a0-a782-3d1b6b6cb75b",
-        "label": "was doen",
+        "uri": "http://data.europa.eu/esco/skill/8b3aefd2-5021-418f-b069-828fb7abc598",
+        "label": "verzorgingsbeginselen",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/261e740b-d32d-4356-94a8-3ea29128b70b",
-        "label": "zorgen voor ouderen",
+        "uri": "http://data.europa.eu/esco/skill/62268d9a-42f9-4c65-9ed3-d7ba69249896",
+        "label": "verpleegkundigen ondersteunen",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/e99ddf41-6085-4b91-9de8-8bf251af9ced",
-        "label": "gezondheidstoestand van patiënten controleren",
+        "uri": "http://data.europa.eu/esco/skill/a17286c5-238d-4f0b-bc24-29e9121345de",
+        "label": "actief luisteren",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/71deea7b-d8a0-42de-9d85-2d6a506dade4",
-        "label": "boodschappen doen",
+        "uri": "http://data.europa.eu/esco/skill/8232979d-6aa4-40c9-a12b-5152a52a76b8",
+        "label": "advies geven in verband met geïnformeerde toestemming van zorgontvangers",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/b4910ea9-578d-4767-bd68-00a315a64e09",
-        "label": "vermogen van oudere volwassenen om voor zichzelf te zorgen beoordelen",
+        "uri": "http://data.europa.eu/esco/skill/7a63f944-6948-4ae4-9c1f-d08e492535c9",
+        "label": "persoonsgerichte zorg toepassen",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/ff939984-b1a6-4d57-88bd-e453262433c4",
-        "label": "gezelschap houden",
+        "uri": "http://data.europa.eu/esco/skill/1709f408-9965-489b-9805-8e1e5d9e483b",
+        "label": "wetgeving inzake gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/1e0ed685-0696-405d-bfa3-dd6ab3751baf",
-        "label": "thuiszorg bieden voor personen met een handicap",
+        "uri": "http://data.europa.eu/esco/skill/f90d4810-8bac-4e5e-b870-3e35a4138ff7",
+        "label": "eigen verantwoordelijkheid aanvaarden",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/8ef1b45e-8499-4b1b-91f7-f8278bbb7767",
-        "label": "gebruikers van sociale dienstverlening met lichamelijke handicaps helpen",
+        "uri": "http://data.europa.eu/esco/skill/ce0d6a42-59c1-433e-ab62-adfc969c46bb",
+        "label": "zorgen voor de veiligheid van gebruikers van de gezondheidszorg",
         "hergebruik": ""
       },
       {
-        "uri": "http://data.europa.eu/esco/skill/6b28bb69-a6ef-42d4-84df-46e498f09297",
-        "label": "soorten handicaps",
+        "uri": "http://data.europa.eu/esco/skill/a28e8141-89ee-4b24-a3bb-1aebcc56c72d",
+        "label": "verpleegkundige verzorging toepassen bij langdurige zorg",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/a32e7fb1-af9e-4c09-8ea7-72b7442e9cda",
+        "label": "problemen in de gezondheidszorg oplossen",
+        "hergebruik": ""
+      },
+      {
+        "uri": "http://data.europa.eu/esco/skill/2e90ef65-646a-4b1d-8597-26ca88aa1c6b",
+        "label": "afwijkingen identificeren",
         "hergebruik": ""
       }
     ]
   },
   "skills": [
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/30a494f3-117e-4181-949f-9b11ef5da730",
-      "esco_label": "veranderingen in gezondheidsdiensten leiden",
-      "uitspraak": "Je signaleert veranderingen in de gezondheid van cliënten en rapporteert deze in",
-      "bronzin": "Je signaleert veranderingen in de gezondheid van cliënten en rapporteert deze in het elektronisch cliëntdossier Zorgkompas.",
+      "esco_uri": "http://data.europa.eu/esco/skill/1fd57242-267e-46df-bd8c-849fdd593a50",
+      "esco_label": "voorgeschreven geneesmiddelen toedienen",
+      "uitspraak": "voorgeschreven geneesmiddelen toedienen",
+      "bronzin": "Je voert verpleegtechnische handelingen uit, zoals medicatie toedienen en wondverzorging.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
       "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
@@ -134,9 +199,20 @@
       "door_mens_bevestigd": false
     },
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/3cb348a4-e49e-4fe2-a403-d558dce1b38d",
-      "esco_label": "familierecht",
-      "uitspraak": "Je stelt samen met de cliënt en familie het zorgplan op en evalueert dit",
+      "esco_uri": "http://data.europa.eu/esco/skill/1c6736c2-77de-419c-9b84-8932e15abc21",
+      "esco_label": "wondverzorging uitvoeren",
+      "uitspraak": "wondverzorging uitvoeren",
+      "bronzin": "Je voert verpleegtechnische handelingen uit, zoals medicatie toedienen en wondverzorging.",
+      "signaalwoorden": [],
+      "categorie": "on_the_job",
+      "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
+      "betrouwbaarheid": "laag",
+      "door_mens_bevestigd": false
+    },
+    {
+      "esco_uri": "http://data.europa.eu/esco/skill/2806b5cb-964b-4148-84aa-7efdbeffe9e3",
+      "esco_label": "gebruikers van diensten en verzorgers betrekken bij de planning van zorg",
+      "uitspraak": "gebruikers van diensten en verzorgers betrekken bij de planning van zorg",
       "bronzin": "Je stelt samen met de cliënt en familie het zorgplan op en evalueert dit.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
@@ -145,23 +221,20 @@
       "door_mens_bevestigd": false
     },
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/7b3717e4-e963-44e0-b94f-1088a7242da0",
-      "esco_label": "planten verzorgen",
-      "uitspraak": "een diploma Verzorgende IG",
-      "bronzin": "Je beschikt over een diploma Verzorgende IG (mbo niveau 3).",
-      "signaalwoorden": [
-        "beschikt over",
-        "diploma"
-      ],
-      "categorie": "instroom",
-      "toelichting": "De vacature noemt dit als harde eis (signaalwoord in de bronzin).",
-      "betrouwbaarheid": "midden",
+      "esco_uri": "http://data.europa.eu/esco/skill/7e57eb3c-092b-4307-ad1c-c65f55adbc4e",
+      "esco_label": "gebruikers van sociale diensten stimuleren hun onafhankelijkheid te bewaren in dagelijkse activiteiten",
+      "uitspraak": "gebruikers van sociale diensten stimuleren hun onafhankelijkheid te bewaren in dagelijkse activiteiten",
+      "bronzin": "Je begeleidt cliënten met dementie bij dagelijkse activiteiten.",
+      "signaalwoorden": [],
+      "categorie": "on_the_job",
+      "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
+      "betrouwbaarheid": "laag",
       "door_mens_bevestigd": false
     },
     {
-      "esco_uri": "http://data.europa.eu/esco/skill/e35cfb6e-ea8e-4aef-aab9-3cbc7d79647b",
-      "esco_label": "Nederlands schrijven",
-      "uitspraak": "Je communiceert helder in het Nederlands",
+      "esco_uri": "http://data.europa.eu/esco/skill/c44b765b-76fb-4a16-be7e-9925beee072c",
+      "esco_label": "mondeling in het Nederlands communiceren",
+      "uitspraak": "mondeling in het Nederlands communiceren",
       "bronzin": "Je communiceert helder in het Nederlands, mondeling en schriftelijk.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
@@ -172,7 +245,18 @@
     {
       "esco_uri": "http://data.europa.eu/esco/skill/996243ee-543f-4c36-a31a-e0f2403c0c5d",
       "esco_label": "empathisch zijn",
-      "uitspraak": "empathisch",
+      "uitspraak": "empathisch zijn",
+      "bronzin": "Je bent empathisch, geduldig en kunt goed luisteren.",
+      "signaalwoorden": [],
+      "categorie": "on_the_job",
+      "toelichting": "Geen duidelijk signaal gevonden; bij twijfel on the job.",
+      "betrouwbaarheid": "laag",
+      "door_mens_bevestigd": false
+    },
+    {
+      "esco_uri": "http://data.europa.eu/esco/skill/a17286c5-238d-4f0b-bc24-29e9121345de",
+      "esco_label": "actief luisteren",
+      "uitspraak": "actief luisteren",
       "bronzin": "Je bent empathisch, geduldig en kunt goed luisteren.",
       "signaalwoorden": [],
       "categorie": "on_the_job",
@@ -188,14 +272,17 @@
       "signaalwoorden": []
     },
     {
-      "uitspraak": "Je voert verpleegtechnische handelingen uit",
-      "bronzin": "Je voert verpleegtechnische handelingen uit, zoals medicatie toedienen en wondverzorging.",
+      "uitspraak": "Je signaleert veranderingen in de gezondheid van cliënten en rapporteert deze in",
+      "bronzin": "Je signaleert veranderingen in de gezondheid van cliënten en rapporteert deze in het elektronisch cliëntdossier Zorgkompas.",
       "signaalwoorden": []
     },
     {
-      "uitspraak": "Je begeleidt cliënten met dementie bij dagelijkse activiteiten",
-      "bronzin": "Je begeleidt cliënten met dementie bij dagelijkse activiteiten.",
-      "signaalwoorden": []
+      "uitspraak": "een diploma Verzorgende IG",
+      "bronzin": "Je beschikt over een diploma Verzorgende IG (mbo niveau 3).",
+      "signaalwoorden": [
+        "beschikt over",
+        "diploma"
+      ]
     },
     {
       "uitspraak": "in bezit van een geldige BIG-registratie of bereid deze aan te vragen",
@@ -242,58 +329,113 @@
   ],
   "mogelijk_ontbrekend": [
     {
-      "uri": "http://data.europa.eu/esco/skill/c662be22-f17a-4ba0-894f-d720b20c44cf",
-      "label": "afwassen",
+      "uri": "http://data.europa.eu/esco/skill/76395873-7fe2-4f9a-b4b6-9932f8cbd0b4",
+      "label": "klinische richtlijnen volgen",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/eacac7e2-4e88-4bd3-9797-1dd1922cd10a",
-      "label": "personen helpen zich aan te passen aan een lichamelijke beperking",
+      "uri": "http://data.europa.eu/esco/skill/9fcf9918-fdef-49c3-aedc-518eb1e7e1f5",
+      "label": "wetgeving in verband met gezondheidszorg naleven",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/562b1180-83e7-4041-8468-2f28d03b7893",
-      "label": "stoffen strijken",
+      "uri": "http://data.europa.eu/esco/skill/8168333b-8257-48f6-82c5-6b5128c21ecc",
+      "label": "mensgerichte zorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/b72395ea-623b-4204-abef-a67592b0781a",
-      "label": "kant-en-klaarmaaltijden bereiden",
+      "uri": "http://data.europa.eu/esco/skill/d429b19a-132f-44d3-971b-bb0ccd94f979",
+      "label": "verplegingswetenschap",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/b6b2e665-1085-4f4d-9973-e979721815d7",
-      "label": "klanten met bijzondere behoeften assisteren",
+      "uri": "http://data.europa.eu/esco/skill/13724e7d-b946-4773-915e-9621340237bc",
+      "label": "bijdragen aan de continuïteit van de gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/493a1805-6caa-4cda-8fd3-6495ec8ea451",
-      "label": "broodjes bereiden",
+      "uri": "http://data.europa.eu/esco/skill/7110bf9f-b245-4adc-9159-5081013fd64d",
+      "label": "communiceren in de gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/634865e0-2ec2-4b7f-bb7f-c196637f0f7b",
-      "label": "behoeften van oudere volwassenen",
+      "uri": "http://data.europa.eu/esco/skill/049c8caf-dd12-45fc-9bfa-b64051f32a19",
+      "label": "reageren op veranderende omstandigheden in de gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/941438bd-cc03-4326-91bf-677157dca170",
-      "label": "gebruikers van sociale diensten ondersteunen om thuis te wonen",
+      "uri": "http://data.europa.eu/esco/skill/24f980ba-b44f-4739-b563-205104c3190d",
+      "label": "basisondersteuning aan patiënten bieden",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/e0c6fdd1-336a-4e2f-91d1-ab4a2f9c385d",
-      "label": "bedden opmaken",
+      "uri": "http://data.europa.eu/esco/skill/c65aa043-98da-4136-9877-494e72d9e4cf",
+      "label": "communiceren met gebruikers van gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/eaa4cdc0-43e0-4388-9b8a-e2779218d10e",
-      "label": "eerste hulp",
+      "uri": "http://data.europa.eu/esco/skill/68088afb-3afd-4538-8e25-377a63f09666",
+      "label": "communiceren met verplegend personeel",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/0dcea846-04b4-4ffc-8c75-a35c991454b1",
-      "label": "reageren op noodsituaties",
+      "uri": "http://data.europa.eu/esco/skill/b9f16465-56a9-426b-a047-0f9f1f95ec92",
+      "label": "problemen kritisch behandelen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/98eb1f3b-3480-416b-bd4b-811946f7e347",
+      "label": "kwaliteitsnormen in verband met de uitoefening van gezondheidszorg naleven",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/e6bf6e73-230a-434c-97b2-a0c042a8b7ac",
+      "label": "duurzaamheidsbeginselen in de gezondheidszorg toepassen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/f7464f30-662b-4177-85a0-3df9693e9e58",
+      "label": "EHBO",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/2475cd27-8d6c-4318-a364-21395b23acba",
+      "label": "meeleven met gebruikers van gezondheidszorg",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/eba85523-6ad2-4cd9-9b27-a0b6a39b8cfa",
+      "label": "werken in multidisciplinaire gezondheidsteams",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/516e324b-03fc-4d3b-9986-e46e9834cd43",
+      "label": "grondbeginselen van verpleging implementeren",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/1023ac61-250f-4eef-b7a9-238cf071685f",
+      "label": "professionele zorg bieden bij verpleging",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/f98e06f5-a09a-4356-b6a8-d55a7d3c5356",
+      "label": "verpleegkundige zorg toepassen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/bccafecc-4d80-43d3-8c9f-aef382c3926f",
+      "label": "samenwerken met verplegend personeel",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/bcd2ce08-ba12-4d66-865f-f4ba36419707",
+      "label": "inclusie bevorderen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/6acf652c-33b2-4e28-8f79-1e553f255229",
+      "label": "verpleegkundige zorg plannen",
       "hergebruik": ""
     },
     {
@@ -302,58 +444,63 @@
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/ab89ad86-1098-44bb-9465-05af5624557c",
-      "label": "mensen vergezellen",
+      "uri": "http://data.europa.eu/esco/skill/d3b74d50-7fc9-4051-9335-58d129a4a064",
+      "label": "vitale functies van patiënten monitoren",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/f3a96be9-639d-43e0-aed5-c596980798d6",
-      "label": "reizigers met een handicap helpen",
+      "uri": "http://data.europa.eu/esco/skill/0450eaee-1a00-4622-8f4e-5356fce816d2",
+      "label": "hygiëne in de gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/04838ae5-a737-48a0-a782-3d1b6b6cb75b",
-      "label": "was doen",
+      "uri": "http://data.europa.eu/esco/skill/8b3aefd2-5021-418f-b069-828fb7abc598",
+      "label": "verzorgingsbeginselen",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/261e740b-d32d-4356-94a8-3ea29128b70b",
-      "label": "zorgen voor ouderen",
+      "uri": "http://data.europa.eu/esco/skill/62268d9a-42f9-4c65-9ed3-d7ba69249896",
+      "label": "verpleegkundigen ondersteunen",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/e99ddf41-6085-4b91-9de8-8bf251af9ced",
-      "label": "gezondheidstoestand van patiënten controleren",
+      "uri": "http://data.europa.eu/esco/skill/8232979d-6aa4-40c9-a12b-5152a52a76b8",
+      "label": "advies geven in verband met geïnformeerde toestemming van zorgontvangers",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/71deea7b-d8a0-42de-9d85-2d6a506dade4",
-      "label": "boodschappen doen",
+      "uri": "http://data.europa.eu/esco/skill/7a63f944-6948-4ae4-9c1f-d08e492535c9",
+      "label": "persoonsgerichte zorg toepassen",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/b4910ea9-578d-4767-bd68-00a315a64e09",
-      "label": "vermogen van oudere volwassenen om voor zichzelf te zorgen beoordelen",
+      "uri": "http://data.europa.eu/esco/skill/1709f408-9965-489b-9805-8e1e5d9e483b",
+      "label": "wetgeving inzake gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/ff939984-b1a6-4d57-88bd-e453262433c4",
-      "label": "gezelschap houden",
+      "uri": "http://data.europa.eu/esco/skill/f90d4810-8bac-4e5e-b870-3e35a4138ff7",
+      "label": "eigen verantwoordelijkheid aanvaarden",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/1e0ed685-0696-405d-bfa3-dd6ab3751baf",
-      "label": "thuiszorg bieden voor personen met een handicap",
+      "uri": "http://data.europa.eu/esco/skill/ce0d6a42-59c1-433e-ab62-adfc969c46bb",
+      "label": "zorgen voor de veiligheid van gebruikers van de gezondheidszorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/8ef1b45e-8499-4b1b-91f7-f8278bbb7767",
-      "label": "gebruikers van sociale dienstverlening met lichamelijke handicaps helpen",
+      "uri": "http://data.europa.eu/esco/skill/a28e8141-89ee-4b24-a3bb-1aebcc56c72d",
+      "label": "verpleegkundige verzorging toepassen bij langdurige zorg",
       "hergebruik": ""
     },
     {
-      "uri": "http://data.europa.eu/esco/skill/6b28bb69-a6ef-42d4-84df-46e498f09297",
-      "label": "soorten handicaps",
+      "uri": "http://data.europa.eu/esco/skill/a32e7fb1-af9e-4c09-8ea7-72b7442e9cda",
+      "label": "problemen in de gezondheidszorg oplossen",
+      "hergebruik": ""
+    },
+    {
+      "uri": "http://data.europa.eu/esco/skill/2e90ef65-646a-4b1d-8597-26ca88aa1c6b",
+      "label": "afwijkingen identificeren",
       "hergebruik": ""
     }
   ],
@@ -373,7 +520,7 @@
   ],
   "schone_tekst": "Verzorgende IG – Woonzorgcentrum De Linde (24-32 uur)\n\nWie zijn wij?\nWoonzorgcentrum De Linde (fictief) biedt zorg aan 80 ouderen in Rotterdam-Zuid, waarvan een deel met dementie. Wij werken kleinschalig en in vaste teams.\n\nWat ga je doen?\n- Je ondersteunt cliënten bij persoonlijke verzorging, zoals wassen, aankleden en eten.\n- Je voert verpleegtechnische handelingen uit, zoals medicatie toedienen en wondverzorging.\n- Je signaleert veranderingen in de gezondheid van cliënten en rapporteert deze in het elektronisch cliëntdossier Zorgkompas.\n- Je stelt samen met de cliënt en familie het zorgplan op en evalueert dit.\n- Je begeleidt cliënten met dementie bij dagelijkse activiteiten.\n\nWat vragen wij?\n- Je beschikt over een diploma Verzorgende IG (mbo niveau 3).\n- Je bent in bezit van een geldige BIG-registratie of bereid deze aan te vragen.\n- Je communiceert helder in het Nederlands, mondeling en schriftelijk.\n- Je bent empathisch, geduldig en kunt goed luisteren.\n- Ervaring met cliënten met dementie is een pré.\n- Affiniteit met digitale zorgtechnologie, zoals sensoren en beeldbellen.\n\nWat bieden wij?\n- Je wordt ingewerkt in Zorgkompas en onze werkwijze rond medicatie.\n- Wij leiden je op in methodisch werken met de belevingsgerichte zorgaanpak.\n- Ruimte voor scholing en doorgroeien naar niveau 4.\n\nSolliciteren?\nNeem contact op met [contactpersoon], teamleider, via [telefoonnummer] of [e-mailadres].\n",
   "metadata": {
-    "datum": "2026-11-10T10:29:01",
+    "datum": "2026-11-10T11:09:09",
     "model": "mock/mock-regels-v1",
     "esco_versie": "v1.2.0",
     "app_versie": "0.1.0"

@@ -171,8 +171,40 @@ class MockProvider(LLMProvider):
 _KOPJES_ZONDER_SKILLS = ("over ons", "wie zijn wij", "over het bedrijf", "interesse", "solliciteren", "contact")
 
 
+# Trefwoordenlijst van de mock: herkent veelvoorkomende skills in de drie pilotberoepen en
+# geeft een korte zoekterm die in ESCO goed werkt (gecontroleerd tegen de ESCO-zoekfunctie).
+# Een echt AI-model heeft deze lijst niet nodig; dit is alleen om de mock bruikbaarder te maken.
+_MOCK_TREFWOORDEN = [
+    (r"heftruck", "heftrucks bedienen"),
+    (r"binnenkomende goederen|goederen ontvangen", "goederen ontvangen"),
+    (r"\borders?\b|order picking", "gelijktijdig meerdere orders uitvoeren"),
+    (r"voorraad", "gegevens over voorraden bijhouden"),
+    (r"warehouse management|magazijnsysteem|\bwms\b", "een magazijnbeheersysteem gebruiken"),
+    (r"rijbewijs", "voertuigen besturen"),
+    (r"stressbestendig", "stressbestendig zijn"),
+    (r"nederlands", "mondeling in het Nederlands communiceren"),
+    (r"veilige? (en opgeruimde )?werkplek", "gezondheid en veiligheid op de werkplek"),
+    (r"medicatie toedienen", "voorgeschreven geneesmiddelen toedienen"),
+    (r"wondverzorging", "wondverzorging uitvoeren"),
+    (r"zorgplan", "gebruikers van diensten en verzorgers betrekken bij de planning van zorg"),
+    (r"dagelijkse activiteiten", "gebruikers van sociale diensten stimuleren hun onafhankelijkheid te bewaren in dagelijkse activiteiten"),
+    (r"empathisch", "empathisch zijn"),
+    (r"luisteren", "actief luisteren"),
+    (r"technische tekeningen", "technische tekeningen lezen"),
+    (r"domotica|slimme meters?", "slimme apparaten installeren"),
+    (r"zonnepanelen", "fotovoltaïsche panelen installeren"),
+    (r"omvormer", "omvormers installeren"),
+    (r"elektrotechniek", "elektrotechniek"),
+    (r"nen ?3140", "veiligheidsnormen voor elektrische apparatuur"),
+]
+
+
 def _mock_extractie(tekst: str, signaalwoorden: list[str]) -> dict:
-    """Neem elke opsommingsregel ('- ...') als skill-uitspraak."""
+    """Neem elke opsommingsregel ('- ...') als bron voor skill-uitspraken.
+
+    Herkent de regel trefwoorden uit _MOCK_TREFWOORDEN, dan wordt elk trefwoord een
+    aparte uitspraak met een korte zoekterm. Anders wordt de kern van de zin gebruikt.
+    """
     regels = [r.strip() for r in tekst.splitlines()]
     titel = next((r for r in regels if r), "")
     titel = re.split(r"[–\-(]", titel)[0].strip()
@@ -185,7 +217,9 @@ def _mock_extractie(tekst: str, signaalwoorden: list[str]) -> dict:
         if not zin:
             continue
         gevonden = [w for w in signaalwoorden if re.search(rf"(?<!\w){re.escape(w)}(?!\w)", zin, re.IGNORECASE)]
-        uitspraken.append({"uitspraak": _kern(zin), "bronzin": zin, "signaalwoorden": gevonden})
+        termen = [term for patroon, term in _MOCK_TREFWOORDEN if re.search(patroon, zin, re.IGNORECASE)]
+        for term in termen or [_kern(zin)]:
+            uitspraken.append({"uitspraak": term, "bronzin": zin, "signaalwoorden": gevonden})
     return {"functietitel": titel, "uitspraken": uitspraken}
 
 
@@ -212,7 +246,7 @@ def _stammen(tekst: str) -> set[str]:
 def _mock_koppeling(items: list[dict]) -> dict:
     """Kies per uitspraak de kandidaat waarvan de meeste labelwoorden in de bronzin staan.
 
-    Minstens de helft van de (inhoudelijke) woorden van het ESCO-label moet in de
+    Meer dan de helft van de (inhoudelijke) woorden van het ESCO-label moet in de
     uitspraak of bronzin voorkomen; anders "geen passende ESCO-skill".
     """
     keuzes = []
@@ -224,7 +258,7 @@ def _mock_koppeling(items: list[dict]) -> dict:
             if not label:
                 continue
             score = len(bron & label) / len(label)
-            if score >= 0.5 and score > beste_score:
+            if score > 0.5 and score > beste_score:
                 beste, beste_score = kandidaat["uri"], score
         keuzes.append({"nummer": item["nummer"], "esco_uri": beste})
     return {"keuzes": keuzes}
