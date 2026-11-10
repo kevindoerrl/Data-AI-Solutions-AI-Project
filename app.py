@@ -10,6 +10,7 @@ import streamlit as st
 from src import pipeline
 from src.config import APP_VERSIE, ESCO_VERSIE, VOORBEELD_MAP
 from src.esco import EscoFout
+from src.export import is_definitief, naar_csv, naar_json
 from src.llm_providers import LLMFout, kies_provider
 from src.models import Profiel, ProfielSkill
 
@@ -74,6 +75,17 @@ def zet_om(index: int) -> None:
     skill.toelichting = "Door een mens omgezet van instroom naar on the job. " + skill.toelichting
 
 
+def herstel(index: int) -> None:
+    """Maak de beslissing van de mens ongedaan (terug naar het voorstel van de tool)."""
+    origineel = st.session_state.origineel.skills[index]
+    st.session_state.profiel.skills[index] = origineel.model_copy(deep=True)
+
+
+def bewaar_resultaat(profiel: Profiel) -> None:
+    st.session_state.profiel = profiel
+    st.session_state.origineel = profiel.model_copy(deep=True)  # voor "ongedaan maken"
+
+
 def toon_skillkaart(skill: ProfielSkill, index: int) -> None:
     with st.container(border=True):
         st.markdown(f"**{skill.esco_label}**  \n{label_html(skill.betrouwbaarheid)}", unsafe_allow_html=True)
@@ -82,15 +94,15 @@ def toon_skillkaart(skill: ProfielSkill, index: int) -> None:
             st.markdown(f'<div class="bronzin">{html.escape(skill.bronzin)}</div>', unsafe_allow_html=True)
             st.caption(f"ESCO: [{skill.esco_uri}]({skill.esco_uri})")
 
-        if skill.categorie == "instroom":
-            if skill.door_mens_bevestigd:
-                st.success("Instroomeis bevestigd door een mens", icon="✅")
-            else:
-                links, rechts = st.columns(2)
-                links.button("Bevestig instroom", key=f"bev_{index}", on_click=bevestig, args=(index,), use_container_width=True)
-                rechts.button("Zet om naar on the job", key=f"om_{index}", on_click=zet_om, args=(index,), use_container_width=True)
+        if skill.categorie == "instroom" and not skill.door_mens_bevestigd:
+            links, rechts = st.columns(2)
+            links.button("Bevestig instroom", key=f"bev_{index}", on_click=bevestig, args=(index,), use_container_width=True)
+            rechts.button("Zet om naar on the job", key=f"om_{index}", on_click=zet_om, args=(index,), use_container_width=True)
         elif skill.door_mens_bevestigd:
-            st.caption("↪ Door een mens omgezet naar on the job")
+            tekst = "✅ Instroomeis bevestigd door een mens" if skill.categorie == "instroom" else "↪ Door een mens omgezet naar on the job"
+            links, rechts = st.columns([3, 1])
+            links.markdown(tekst)
+            rechts.button("Ongedaan maken", key=f"herstel_{index}", on_click=herstel, args=(index,), use_container_width=True)
 
 
 def toon_resultaat(profiel: Profiel) -> None:
@@ -169,6 +181,23 @@ def toon_resultaat(profiel: Profiel) -> None:
         tekst = markeer(profiel.schone_tekst, [s.bronzin for s in profiel.skills])
         st.markdown(f'<div class="vacaturetekst">{tekst}</div>', unsafe_allow_html=True)
 
+    # Export
+    st.markdown("### Exporteren")
+    definitief = is_definitief(profiel)
+    status = "definitief" if definitief else "concept"
+    if not definitief:
+        st.caption("Nog niet alle instroomeisen zijn gecontroleerd. Je kunt nu alleen een **concept** downloaden.")
+    naam = (profiel.functietitel or "profiel").lower().replace(" ", "_")
+    links, rechts = st.columns(2)
+    links.download_button(
+        f"Download {status} als CSV", naar_csv(profiel), file_name=f"skillsprofiel_{naam}_{status}.csv",
+        mime="text/csv", use_container_width=True, type="primary" if definitief else "secondary",
+    )
+    rechts.download_button(
+        f"Download {status} als JSON", naar_json(profiel), file_name=f"skillsprofiel_{naam}_{status}.json",
+        mime="application/json", use_container_width=True, type="primary" if definitief else "secondary",
+    )
+
     st.caption(
         f"Model: {profiel.metadata.model} · ESCO {profiel.metadata.esco_versie} · "
         f"app {profiel.metadata.app_versie} · {profiel.metadata.datum}"
@@ -219,7 +248,7 @@ if st.button("Analyseer vacature", type="primary", disabled=provider is None):
                 status.write(f"Stap {stap + 1} van {len(pipeline.STAPPEN)}: {bericht}…")
 
             try:
-                st.session_state.profiel = pipeline.analyseer(tekst, provider=provider, voortgang=voortgang)
+                bewaar_resultaat(pipeline.analyseer(tekst, provider=provider, voortgang=voortgang))
                 status.update(label="Analyse klaar", state="complete", expanded=False)
             except (LLMFout, EscoFout) as fout:
                 status.update(label="Er ging iets mis", state="error")
