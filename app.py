@@ -9,6 +9,7 @@ import streamlit as st
 
 from src import pipeline
 from src.config import APP_VERSIE, ESCO_VERSIE, VOORBEELD_MAP
+from src.esco import EscoFout
 from src.llm_providers import LLMFout, kies_provider
 from src.models import Profiel, ProfielSkill
 
@@ -220,7 +221,7 @@ if st.button("Analyseer vacature", type="primary", disabled=provider is None):
             try:
                 st.session_state.profiel = pipeline.analyseer(tekst, provider=provider, voortgang=voortgang)
                 status.update(label="Analyse klaar", state="complete", expanded=False)
-            except LLMFout as fout:
+            except (LLMFout, EscoFout) as fout:
                 status.update(label="Er ging iets mis", state="error")
                 st.error(f"{fout} Tip: zet de demo-modus aan in de zijbalk.")
 

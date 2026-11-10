@@ -196,19 +196,35 @@ def _kern(zin: str) -> str:
     return kort.strip()[:80]
 
 
-def _woorden(tekst: str) -> set[str]:
-    return {w for w in re.findall(r"\w+", tekst.lower()) if len(w) > 3}
+# Woorden die te algemeen zijn om op te koppelen (anders wordt "in bezit van" -> "managementvaardigheden bezitten")
+_STOPWOORDEN = {
+    "voor", "met", "van", "een", "het", "door", "naar", "over", "zich", "zijn", "werken", "gebruiken",
+    "uitvoeren", "bezit", "bezitten", "ervaring", "diploma", "geldig", "geldige", "kennis", "contract",
+    "digitaal", "digitale", "veranderingen", "samen", "team",
+}
+
+
+def _stammen(tekst: str) -> set[str]:
+    """Woorden afgekapt tot 5 letters, zodat 'heftruck' en 'heftrucks' gelijk zijn."""
+    return {w[:5] for w in re.findall(r"\w+", tekst.lower()) if len(w) > 3 and w not in _STOPWOORDEN}
 
 
 def _mock_koppeling(items: list[dict]) -> dict:
-    """Kies per uitspraak de kandidaat met de meeste overlappende woorden."""
+    """Kies per uitspraak de kandidaat waarvan de meeste labelwoorden in de bronzin staan.
+
+    Minstens de helft van de (inhoudelijke) woorden van het ESCO-label moet in de
+    uitspraak of bronzin voorkomen; anders "geen passende ESCO-skill".
+    """
     keuzes = []
     for item in items:
-        bron = _woorden(item["uitspraak"] + " " + item.get("bronzin", ""))
-        beste, beste_score = None, 0
+        bron = _stammen(item["uitspraak"] + " " + item.get("bronzin", ""))
+        beste, beste_score = None, 0.0
         for kandidaat in item["kandidaten"]:
-            score = len(bron & _woorden(kandidaat["label"]))
-            if score > beste_score:
+            label = _stammen(kandidaat["label"])
+            if not label:
+                continue
+            score = len(bron & label) / len(label)
+            if score >= 0.5 and score > beste_score:
                 beste, beste_score = kandidaat["uri"], score
         keuzes.append({"nummer": item["nummer"], "esco_uri": beste})
     return {"keuzes": keuzes}
