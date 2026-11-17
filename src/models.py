@@ -28,17 +28,31 @@ class PrivacyResultaat(BaseModel):
 
 # ---------- Stap 2: extractie ----------
 
+Rubriek = Literal["taken", "eisen", "aanbod", "overig"]
+
+
 class SkillUitspraak(BaseModel):
     """Een uitspraak over een skill, zoals het AI-model die uit de vacature haalt."""
 
     uitspraak: str = Field(description="Korte omschrijving van de skill, bijv. 'heftruck besturen'")
     bronzin: str = Field(description="De zin letterlijk uit de vacature")
     signaalwoorden: list[str] = Field(default_factory=list)
+    # Onder welk kopje staat de zin? "taken" (wat ga je doen), "eisen" (wat vragen wij / profiel),
+    # "aanbod" (wat bieden wij) of "overig". Dat zegt veel over hoe hard een eis is.
+    rubriek: Rubriek = "overig"
+
+
+class OvergeslagenZin(BaseModel):
+    """Een zin uit de vacature waar bewust GEEN skill uit is gehaald, met de reden."""
+
+    zin: str
+    reden: str
 
 
 class ExtractieResultaat(BaseModel):
     functietitel: str = ""
     uitspraken: list[SkillUitspraak]
+    overgeslagen: list[OvergeslagenZin] = Field(default_factory=list)
 
 
 # ---------- Stap 3: ESCO-koppeling ----------
@@ -94,10 +108,37 @@ class ProfielSkill(BaseModel):
     uitspraak: str
     bronzin: str
     signaalwoorden: list[str] = Field(default_factory=list)
+    rubriek: Rubriek = "overig"
+    # Andere zinnen uit de vacature die over dezelfde ESCO-skill gaan (worden samen beoordeeld)
+    extra_bronzinnen: list[str] = Field(default_factory=list)
+    extra_rubrieken: list[Rubriek] = Field(default_factory=list)
     categorie: Categorie = "on_the_job"
     toelichting: str = ""
     betrouwbaarheid: Betrouwbaarheid = "laag"
     door_mens_bevestigd: bool = False
+    # Uitleg "achter de schermen": hoe is de categorie tot stand gekomen?
+    regel_advies: Categorie | None = None
+    regel_reden: str = ""
+    model_categorie: Categorie | None = None
+    vangnet: str = ""
+
+    def alle_bronzinnen(self) -> list[str]:
+        return [self.bronzin, *self.extra_bronzinnen]
+
+
+class UitspraakUitleg(BaseModel):
+    """Wat de tool met één skill-uitspraak heeft gedaan (voor de transparantie-weergave)."""
+
+    uitspraak: str
+    bronzin: str
+    rubriek: Rubriek = "overig"
+    signaalwoorden: list[str] = Field(default_factory=list)
+    kandidaten: list[str] = Field(default_factory=list)  # ESCO-labels die de zoekfunctie gaf
+    gekozen_label: str | None = None
+    gekozen_uri: str | None = None
+    samengevoegd: bool = False  # dezelfde ESCO-skill kwam ook uit een andere zin
+    regel_advies: Categorie | None = None
+    regel_reden: str = ""
 
 
 class Metadata(BaseModel):
@@ -114,6 +155,8 @@ class Profiel(BaseModel):
     beroep: EscoBeroep | None = None
     skills: list[ProfielSkill] = Field(default_factory=list)
     niet_gekoppeld: list[SkillUitspraak] = Field(default_factory=list)
+    overgeslagen: list[OvergeslagenZin] = Field(default_factory=list)
+    uitleg: list[UitspraakUitleg] = Field(default_factory=list)
     mogelijk_ontbrekend: list[EscoSkill] = Field(default_factory=list)
     verwijderd: list[Verwijdering] = Field(default_factory=list)
     schone_tekst: str = ""

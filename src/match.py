@@ -9,10 +9,11 @@
 
 import json
 import logging
+from typing import NamedTuple
 
 from src.esco import EscoClient
 from src.llm_providers import LLMProvider, laad_prompt, vraag_gestructureerd
-from src.models import EscoSkill, KoppelKeuze, KoppelResultaat, SkillUitspraak
+from src.models import EscoSkill, KoppelKeuze, KoppelResultaat, SkillUitspraak, UitspraakUitleg
 
 log = logging.getLogger(__name__)
 
@@ -40,10 +41,18 @@ def valideer_keuzes(
     return geldig, afgekeurd
 
 
+class Koppeling(NamedTuple):
+    """Eén ESCO-skill met de uitspraak die hem het best onderbouwt en eventuele andere uitspraken."""
+
+    hoofd: SkillUitspraak
+    skill: EscoSkill
+    overige: list[SkillUitspraak]
+
+
 def koppel(
     uitspraken: list[SkillUitspraak], esco: EscoClient, provider: LLMProvider
-) -> tuple[list[tuple[SkillUitspraak, EscoSkill]], list[SkillUitspraak]]:
-    """Geeft (gekoppelde paren, uitspraken zonder passende ESCO-skill) terug."""
+) -> tuple[list[Koppeling], list[SkillUitspraak], list[UitspraakUitleg]]:
+    """Geeft (koppelingen, uitspraken zonder passende ESCO-skill, uitleg per uitspraak) terug."""
     kandidaten_per_nummer: dict[int, list[EscoSkill]] = {}
     items = []
     for nummer, u in enumerate(uitspraken, start=1):
@@ -69,15 +78,34 @@ def koppel(
 
     geldig, _ = valideer_keuzes(keuzes, kandidaten_per_nummer)
 
-    # Komt dezelfde ESCO-skill via meerdere uitspraken binnen, dan houden we er één.
-    # We kiezen de uitspraak met de meeste signaalwoorden: "heftruckcertificaat is vereist"
-    # zegt meer over instroom dan "je laadt vrachtwagens met een heftruck".
-    per_uri: dict[str, tuple[SkillUitspraak, EscoSkill]] = {}
+    # Komt dezelfde ESCO-skill via meerdere uitspraken binnen, dan wordt het één skill in het
+    # profiel, maar ALLE zinnen blijven bewaard en worden samen beoordeeld. Zo valt
+    # "ervaring met laadpalen is mooi meegenomen" niet stilletjes weg naast
+    # "je monteert laadpalen". De hoofdzin is die met de meeste signaalwoorden.
+    per_uri: dict[str, list[SkillUitspraak]] = {}
+    skill_per_uri: dict[str, EscoSkill] = {}
     niet_gekoppeld = []
+    uitleg = []
     for nummer, u in enumerate(uitspraken, start=1):
         skill = geldig.get(nummer)
+        uitleg.append(UitspraakUitleg(
+            uitspraak=u.uitspraak, bronzin=u.bronzin, rubriek=u.rubriek, signaalwoorden=u.signaalwoorden,
+            kandidaten=[k.label for k in kandidaten_per_nummer.get(nummer, [])],
+            gekozen_label=skill.label if skill else None, gekozen_uri=skill.uri if skill else None,
+        ))
         if skill is None:
             niet_gekoppeld.append(u)
-        elif skill.uri not in per_uri or len(u.signaalwoorden) > len(per_uri[skill.uri][0].signaalwoorden):
-            per_uri[skill.uri] = (u, skill)
-    return list(per_uri.values()), niet_gekoppeld
+        else:
+            per_uri.setdefault(skill.uri, []).append(u)
+            skill_per_uri[skill.uri] = skill
+
+    koppelingen = []
+    for uri, groep in per_uri.items():
+        # Hoofdzin: de meeste signaalwoorden; bij gelijkspel een zin uit de eisen, dan de eerste
+        hoofd = max(groep, key=lambda u: (len(u.signaalwoorden), u.rubriek == "eisen"))
+        koppelingen.append(Koppeling(hoofd, skill_per_uri[uri], [u for u in groep if u is not hoofd]))
+        if len(groep) > 1:
+            for item in uitleg:
+                if item.gekozen_uri == uri:
+                    item.samengevoegd = True
+    return koppelingen, niet_gekoppeld, uitleg

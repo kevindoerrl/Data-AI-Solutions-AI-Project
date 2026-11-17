@@ -18,7 +18,7 @@ CACHE_MAP = DATA_MAP / "cache"
 KADER_BESTAND = CONFIG_MAP / "classificatiekader.yaml"
 
 # Versies (komen ook in de export terecht)
-APP_VERSIE = "0.1.0"
+APP_VERSIE = "0.2.0"
 ESCO_VERSIE = "v1.2.0"
 ESCO_TAAL = "nl"
 

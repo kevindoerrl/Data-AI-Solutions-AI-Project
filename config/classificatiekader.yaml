@@ -10,6 +10,19 @@
 
 standaard_bij_twijfel: on_the_job
 
+# Onder welk kopje staat een zin? Als er GEEN signaalwoord in de zin staat, geeft het kopje
+# de doorslag. Een zin onder "Wat vragen wij?" zonder "pré" of "mooi meegenomen" is een eis;
+# een zin onder "Wat bieden wij?" is iets wat de werkgever aanleert.
+# Zinnen onder "Wat ga je doen?" (taken) krijgen geen advies van het kopje: de taak alleen
+# zegt niet of je het al moet kunnen.
+rubrieken:
+  eisen:
+    advies: instroom
+    uitleg: staat bij de eisen ("wat vragen wij" / "jouw profiel") zonder woorden als "pré" of "mooi meegenomen"
+  aanbod:
+    advies: on_the_job
+    uitleg: staat bij wat de werkgever biedt, dus de werkgever leert dit aan
+
 categorieen:
   instroom:
     naam: Instroom
@@ -21,6 +34,9 @@ categorieen:
       - naam: Veiligheidskritisch
         omschrijving: Direct nodig om zelfstandig en veilig te kunnen starten.
         signaal: werken met gevaarlijke stoffen, machines, zorg aan cliënten
+      - naam: Gevraagd in het profiel
+        omschrijving: De vacature noemt het onder "wat vragen wij" of "jouw profiel", zonder het als pré of wens te benoemen.
+        signaal: zin staat in de rubriek eisen, zonder on-the-job-signaalwoord
       - naam: Basisvaardigheden met lange leertijd
         omschrijving: Taalniveau, rekenvaardigheid, digitale basisvaardigheden; transversale skills.
         signaal: taalniveau, rekenen, ESCO transversale skills
@@ -75,3 +91,7 @@ categorieen:
       - ervaring is niet nodig
       - bereid om te leren
       - je krijgt een opleiding
+      - of je haalt het
+      - of je haalt deze
+      - halen we samen
+      - in de eerste maand

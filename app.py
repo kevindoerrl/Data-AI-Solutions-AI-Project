@@ -12,9 +12,11 @@ from src import pipeline
 from src.config import APP_VERSIE, ESCO_VERSIE, VOORBEELD_MAP
 from src.demo import laad_vooraf_berekend, zoek_voorbeeld
 from src.esco import EscoFout
+from src.classify import laad_kader
 from src.export import is_definitief, naar_csv, naar_json
 from src.llm_providers import LLMFout, kies_provider
 from src.models import Profiel, ProfielSkill
+from src.uitleg import RUBRIEK_NAMEN, per_regel
 
 st.set_page_config(page_title="Vacature naar ESCO-skillsprofiel", page_icon="🧭", layout="wide")
 
@@ -30,6 +32,21 @@ st.markdown(
     .bronzin { border-left:4px solid #C9CED6; padding:4px 12px; color:#3D4450; font-style:italic; }
     mark { background:#FFF1A8; padding:0 2px; }
     .vacaturetekst { white-space:pre-wrap; font-size:0.95rem; line-height:1.55; }
+    .regel { border-left:6px solid #C9CED6; padding:6px 12px; margin:6px 0; border-radius:4px; background:#FAFBFC; }
+    .regel .zin { font-size:0.98rem; }
+    .regel .uitleg { font-size:0.85rem; color:#3D4450; margin-top:3px; }
+    .regel-instroom   { border-left-color:#00811F; background:#F1FAF3; }
+    .regel-on_the_job { border-left-color:#2F6FDE; background:#F1F5FD; }
+    .regel-geen_esco  { border-left-color:#D98A00; background:#FFF8EA; }
+    .regel-overgeslagen { border-left-color:#E1E4E8; background:transparent; }
+    .regel-overgeslagen .zin { color:#6B7280; }
+    .regel-niet_beoordeeld { border-left-color:#C2410C; background:#FFF3EE; }
+    .pil { display:inline-block; padding:1px 8px; border-radius:999px; font-size:0.78rem; font-weight:600; margin-right:4px; }
+    .pil-instroom { background:#DDF3E4; color:#0B5D1E; }
+    .pil-on_the_job { background:#DCE7FB; color:#1E428A; }
+    .pil-geen_esco { background:#FFE9BF; color:#7A4B00; }
+    .pil-overgeslagen { background:#ECEEF1; color:#3D4450; }
+    .pil-niet_beoordeeld { background:#FFE0D1; color:#8A2E07; }
     </style>
     """,
     unsafe_allow_html=True,
@@ -92,9 +109,13 @@ def toon_skillkaart(skill: ProfielSkill, index: int) -> None:
     with st.container(border=True):
         st.markdown(f"**{skill.esco_label}**  \n{label_html(skill.betrouwbaarheid)}", unsafe_allow_html=True)
         st.write(skill.toelichting)
-        with st.expander("Bronzin uit de vacature"):
-            st.markdown(f'<div class="bronzin">{html.escape(skill.bronzin)}</div>', unsafe_allow_html=True)
+        zinnen = skill.alle_bronzinnen()
+        with st.expander("Bronzin uit de vacature" if len(zinnen) == 1 else f"Bronzinnen uit de vacature ({len(zinnen)})"):
+            for zin in zinnen:
+                st.markdown(f'<div class="bronzin">{html.escape(zin)}</div>', unsafe_allow_html=True)
             st.caption(f"ESCO: [{skill.esco_uri}]({skill.esco_uri})")
+        with st.expander("Hoe is dit besloten?"):
+            st.markdown(beslissing_markdown(skill))
 
         if skill.categorie == "instroom" and not skill.door_mens_bevestigd:
             links, rechts = st.columns(2)
@@ -107,11 +128,140 @@ def toon_skillkaart(skill: ProfielSkill, index: int) -> None:
             rechts.button("Ongedaan maken", key=f"herstel_{index}", on_click=herstel, args=(index,), use_container_width=True)
 
 
-def toon_resultaat(profiel: Profiel) -> None:
-    instroom, otj = profiel.instroom(), profiel.on_the_job()
+CATEGORIE_NAAM = {"instroom": "instroom", "on_the_job": "on the job", None: "geen advies"}
 
+
+def beslissing_markdown(skill: ProfielSkill) -> str:
+    """De stappen die tot de indeling hebben geleid, in gewone taal."""
+    rubrieken = sorted({RUBRIEK_NAMEN[r] for r in [skill.rubriek, *skill.extra_rubrieken]})
+    woorden = ", ".join(f'"{w}"' for w in skill.signaalwoorden) or "geen"
+    model = (
+        f"{CATEGORIE_NAAM[skill.model_categorie]} (betrouwbaarheid {skill.betrouwbaarheid})"
+        if skill.model_categorie else "geen oordeel"
+    )
+    regels = [
+        f"1. **Kopje in de vacature:** {', '.join(rubrieken)}",
+        f"2. **Signaalwoorden:** {woorden}",
+        f"3. **Regels** (classificatiekader): {CATEGORIE_NAAM[skill.regel_advies]}, want {skill.regel_reden or 'geen signaal'}",
+        f"4. **AI-model:** {model}",
+    ]
+    if skill.vangnet:
+        regels.append(f"5. **Vangnet:** {skill.vangnet}")
+    regels.append(f"\n**Uitkomst: {CATEGORIE_NAAM[skill.categorie]}**")
+    return "\n".join(regels)
+
+
+def _regel_html(r) -> str:
+    """Eén regel van de vacature, met wat de tool ermee deed."""
+    e = html.escape
+    if r.status in ("overgeslagen", "niet_beoordeeld"):
+        woord = "Overgeslagen" if r.status == "overgeslagen" else "Niet beoordeeld"
+        return (
+            f'<div class="regel regel-{r.status}"><div class="zin">{e(r.zin)}</div>'
+            f'<div class="uitleg">{woord}: {e(r.reden)}</div></div>'
+        )
+
+    kop = f"Kopje: {e(RUBRIEK_NAMEN.get(r.rubriek or 'overig', 'overig'))}"
+    if r.signaalwoorden:
+        kop += " · signaalwoorden: " + ", ".join(f"<b>{e(w)}</b>" for w in r.signaalwoorden)
+    regels = [kop]
+    for s in r.stappen:
+        if s.esco_uri:
+            tekst = (
+                f'<span class="pil pil-{s.categorie}">{e(CATEGORIE_NAAM[s.categorie])}</span>'
+                f"„{e(s.uitspraak)}” → ESCO: <b>{e(s.esco_label)}</b> (gekozen uit {len(s.kandidaten)} kandidaten)"
+            )
+            if s.samengevoegd:
+                tekst += " · samen beoordeeld met andere zinnen over dezelfde skill"
+        else:
+            voorstel = ", ".join(e(k) for k in s.kandidaten[:3]) or "niets"
+            tekst = (
+                f'<span class="pil pil-geen_esco">geen ESCO-skill</span>„{e(s.uitspraak)}”: '
+                f"ESCO stelde voor: <i>{voorstel}</i>; geen daarvan past. "
+                f"Volgens de regels: {e(CATEGORIE_NAAM[s.regel_advies])} ({e(s.regel_reden)})."
+            )
+        regels.append(tekst)
+    hoofd = next((s.categorie for s in r.stappen if s.categorie), None)
+    klasse = hoofd if r.status == "skill" and hoofd else "geen_esco"
+    return (
+        f'<div class="regel regel-{klasse}"><div class="zin">{e(r.zin)}</div>'
+        + "".join(f'<div class="uitleg">{x}</div>' for x in regels)
+        + "</div>"
+    )
+
+
+def toon_achter_de_schermen(profiel: Profiel) -> None:
+    """Regel voor regel: wat deed de tool met elke zin uit de vacature, en waarom?"""
+    if not profiel.uitleg:
+        st.info("Dit resultaat is gemaakt met een oudere versie van de tool en bevat nog geen uitleg per regel.")
+        return
+    regels = per_regel(profiel)
+    n = {s: sum(r.status == s for r in regels) for s in ("skill", "geen_esco", "overgeslagen", "niet_beoordeeld")}
+    st.markdown(
+        f"De tool las **{len(regels)} regels**: {n['skill']} leverden een ESCO-skill op, "
+        f"{n['geen_esco']} bevatten een skill of eis zonder passende ESCO-skill, "
+        f"{n['overgeslagen']} zijn bewust overgeslagen"
+        + (f" en {n['niet_beoordeeld']} heeft het model niet genoemd." if n["niet_beoordeeld"] else ".")
+    )
+    st.markdown(
+        '<span class="pil pil-instroom">skill · instroom</span>'
+        '<span class="pil pil-on_the_job">skill · on the job</span>'
+        '<span class="pil pil-geen_esco">geen passende ESCO-skill</span>'
+        '<span class="pil pil-overgeslagen">overgeslagen</span>'
+        + ('<span class="pil pil-niet_beoordeeld">niet beoordeeld</span>' if n["niet_beoordeeld"] else ""),
+        unsafe_allow_html=True,
+    )
+    st.markdown("".join(_regel_html(r) for r in regels), unsafe_allow_html=True)
+
+
+def toon_aannames() -> None:
+    """De vaste regels en aannames van de tool; de signaalwoorden komen uit config/classificatiekader.yaml."""
+    kader = laad_kader()
+    st.markdown(
+        """
+**Welke zinnen leveren een skill op?**
+- Elke regel van de vacature wordt bekeken. Kopjes, bedrijfsinformatie, arbeidsvoorwaarden (contract,
+  bedrijfsbus) en sollicitatie-informatie leveren geen skill op.
+- Taken ("je legt installaties aan"), eisen en wensen ("… is een pré") leveren wél skills op.
+- Een certificaat of diploma wordt vertaald naar de vaardigheid erachter (VCA → veiligheidsnormen toepassen).
+- Alleen skills die de **ESCO-zoekfunctie zelf** voorstelt, kunnen gekozen worden. Past er geen, dan is het
+  "geen passende ESCO-skill": een slechte koppeling is erger dan geen koppeling.
+- Gaan meerdere zinnen over dezelfde ESCO-skill, dan worden ze **samen** beoordeeld.
+
+**Instroom of on the job?**
+1. **Bij twijfel altijd on the job.** Een onterechte instroomeis sluit werkzoekenden uit.
+2. Signaalwoorden in de zin gaan voor (zie hieronder). Staan er signalen voor allebei in, dan is dat twijfel.
+3. Geen signaalwoord? Dan telt het kopje: onder *wat vragen wij* is het een eis, onder *wat bieden wij* leer je
+   het op het werk. Onder *wat ga je doen* zegt het kopje niets.
+4. Het AI-model weegt dit samen met het classificatiekader. Daarna gelden vangnetten: zegt het model instroom
+   met lage betrouwbaarheid, of vinden de regels een leer-signaal, dan wordt het on the job.
+5. Elke instroomeis moet door een mens worden bevestigd.
+"""
+    )
+    links, rechts = st.columns(2)
+    with links:
+        st.markdown("**Signaalwoorden voor instroom**")
+        st.write(", ".join(kader["categorieen"]["instroom"]["signaalwoorden"]))
+    with rechts:
+        st.markdown("**Signaalwoorden voor on the job**")
+        st.write(", ".join(kader["categorieen"]["on_the_job"]["signaalwoorden"]))
+    st.caption("Het team kan deze regels aanpassen in config/classificatiekader.yaml, zonder code te wijzigen.")
+
+
+def toon_resultaat(profiel: Profiel) -> None:
     st.divider()
     st.subheader("Resultaat")
+    tab_profiel, tab_schermen, tab_aannames = st.tabs(["Skillsprofiel", "Achter de schermen", "Aannames van de tool"])
+    with tab_profiel:
+        toon_profiel(profiel)
+    with tab_schermen:
+        toon_achter_de_schermen(profiel)
+    with tab_aannames:
+        toon_aannames()
+
+
+def toon_profiel(profiel: Profiel) -> None:
+    instroom, otj = profiel.instroom(), profiel.on_the_job()
 
     # Herkend beroep
     if profiel.beroep:
@@ -169,7 +319,16 @@ def toon_resultaat(profiel: Profiel) -> None:
         st.write("Geen.")
 
     # Uitspraken zonder passende ESCO-skill
-    if profiel.niet_gekoppeld:
+    zonder_esco = [u for u in profiel.uitleg if not u.gekozen_uri]
+    if zonder_esco:
+        with st.expander(f"Skills en eisen zonder passende ESCO-skill ({len(zonder_esco)})"):
+            st.caption(
+                "Deze staan wel in de vacature, maar ESCO heeft er geen passende skill voor (bijvoorbeeld een "
+                "diploma of registratie). Ze staan daarom niet in het profiel. Zie ook 'Achter de schermen'."
+            )
+            for u in zonder_esco:
+                st.markdown(f"- **{u.uitspraak}** ({CATEGORIE_NAAM[u.regel_advies]} volgens de regels) — _{u.bronzin}_")
+    elif profiel.niet_gekoppeld:
         with st.expander(f"Uitspraken zonder passende ESCO-skill ({len(profiel.niet_gekoppeld)})"):
             for u in profiel.niet_gekoppeld:
                 st.markdown(f"- **{u.uitspraak}** — _{u.bronzin}_")
@@ -182,7 +341,7 @@ def toon_resultaat(profiel: Profiel) -> None:
         else:
             st.write("Er zijn geen persoonsgegevens gevonden.")
     with st.expander("Vacaturetekst met gemarkeerde bronzinnen"):
-        tekst = markeer(profiel.schone_tekst, [s.bronzin for s in profiel.skills])
+        tekst = markeer(profiel.schone_tekst, [z for s in profiel.skills for z in s.alle_bronzinnen()])
         st.markdown(f'<div class="vacaturetekst">{tekst}</div>', unsafe_allow_html=True)
 
     # Export

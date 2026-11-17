@@ -5,7 +5,12 @@ Waarom dit belangrijk is: een onterechte instroomeis sluit werkzoekenden onnodig
 Classificatiekader:
 {{kader}}
 
-Je krijgt een lijst items met per skill: `nummer`, het ESCO-`label`, de `bronzin` uit de vacature, gevonden `signaalwoorden` en een `regel_advies` van een eenvoudige regelcontrole ("instroom", "on_the_job" of null).
+Je krijgt een lijst items met per skill: `nummer`, het ESCO-`label`, de `bronzinnen` uit de vacature (soms meer dan één zin over dezelfde skill), de `rubriek` (onder welk kopje de zin staat: taken, eisen, aanbod of overig), gevonden `signaalwoorden` en een `regel_advies` met `regel_reden` van een eenvoudige regelcontrole ("instroom", "on_the_job" of null).
+
+Let op:
+- Beoordeel alle bronzinnen samen. Zegt één zin "vereist" en een andere "wij leiden je op", dan is dat twijfel: on_the_job.
+- Een vaardigheid die bij de eisen ("wat vragen wij", "jouw profiel") staat zonder woorden als "pré" of "mooi meegenomen", is een eis bij de start.
+- Vraagt de vacature een afgeronde vakopleiding (bijv. mbo Elektrotechniek) en is de skill basisvakkennis uit die opleiding die nodig is voor de kerntaken (bijv. technische tekeningen lezen voor een elektromonteur), dan is dat instroom met betrouwbaarheid "midden".
 
 Per item geef je:
 - `categorie`: "instroom" of "on_the_job"

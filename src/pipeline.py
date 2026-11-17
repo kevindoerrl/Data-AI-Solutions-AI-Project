@@ -12,7 +12,7 @@ Stap 6 (menselijke review) gebeurt in de interface, stap 7 (export) in export.py
 from datetime import datetime
 from typing import Callable
 
-from src.classify import classificeer
+from src.classify import classificeer, regel_oordeel
 from src.config import APP_VERSIE, ESCO_VERSIE
 from src.esco import EscoClient
 from src.extract import extraheer
@@ -38,6 +38,10 @@ def _geen_voortgang(stap: int, bericht: str) -> None:
     pass
 
 
+def _uniek(waarden: list[str]) -> list[str]:
+    return list(dict.fromkeys(waarden))
+
+
 def analyseer(
     tekst: str,
     provider: LLMProvider | None = None,
@@ -58,7 +62,7 @@ def analyseer(
 
     # 3. Koppeling aan ESCO
     voortgang(2, STAPPEN[2])
-    gekoppeld, niet_gekoppeld = koppel(extractie.uitspraken, esco, provider)
+    gekoppeld, niet_gekoppeld, uitleg = koppel(extractie.uitspraken, esco, provider)
 
     # 4. Beroep
     voortgang(3, STAPPEN[3])
@@ -69,22 +73,32 @@ def analyseer(
     voortgang(4, STAPPEN[4])
     skills = [
         ProfielSkill(
-            esco_uri=skill.uri,
-            esco_label=skill.label,
-            uitspraak=u.uitspraak,
-            bronzin=u.bronzin,
-            signaalwoorden=u.signaalwoorden,
+            esco_uri=k.skill.uri,
+            esco_label=k.skill.label,
+            uitspraak=k.hoofd.uitspraak,
+            bronzin=k.hoofd.bronzin,
+            signaalwoorden=_uniek([w for u in (k.hoofd, *k.overige) for w in u.signaalwoorden]),
+            rubriek=k.hoofd.rubriek,
+            extra_bronzinnen=_uniek([u.bronzin for u in k.overige if u.bronzin != k.hoofd.bronzin]),
+            extra_rubrieken=[u.rubriek for u in k.overige],
         )
-        for u, skill in gekoppeld
+        for k in gekoppeld
     ]
-    hergebruik = {skill.uri: skill.hergebruik for _, skill in gekoppeld}
+    hergebruik = {k.skill.uri: k.skill.hergebruik for k in gekoppeld}
     skills = classificeer(skills, provider, hergebruik)
+
+    # Ook voor uitspraken zonder ESCO-skill (bijv. "diploma Verzorgende IG") laten we zien
+    # wat de regels ervan vinden, zodat zichtbaar is dat het wel een eis is.
+    for item in uitleg:
+        item.regel_advies, item.regel_reden = regel_oordeel([item.bronzin], item.signaalwoorden, [item.rubriek])
 
     return Profiel(
         functietitel=extractie.functietitel,
         beroep=beroep,
         skills=skills,
         niet_gekoppeld=niet_gekoppeld,
+        overgeslagen=extractie.overgeslagen,
+        uitleg=uitleg,
         mogelijk_ontbrekend=mogelijk_ontbrekend(beroep, skills),
         verwijderd=privacy.verwijderd,
         schone_tekst=privacy.schone_tekst,

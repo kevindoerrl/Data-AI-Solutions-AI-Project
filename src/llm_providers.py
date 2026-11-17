@@ -168,7 +168,30 @@ class MockProvider(LLMProvider):
 
 # --- hulpfuncties voor de mock ---
 
-_KOPJES_ZONDER_SKILLS = ("over ons", "wie zijn wij", "over het bedrijf", "interesse", "solliciteren", "contact")
+# Kopjes in een vacature en de rubriek die erbij hoort
+_KOPJES = {
+    "taken": ("wat ga je doen", "jouw werkzaamheden", "werkzaamheden", "taken", "functieomschrijving", "wat houdt de functie in"),
+    "eisen": ("wat vragen wij", "wat vragen we", "jouw profiel", "wie ben jij", "wie zoeken wij", "functie-eisen", "wat neem je mee", "wat breng je mee"),
+    "aanbod": ("wat bieden wij", "wat bieden we", "wat wij bieden", "arbeidsvoorwaarden", "wat krijg je"),
+    "bedrijf": ("over ons", "wie zijn wij", "over het bedrijf"),
+    "sollicitatie": ("interesse", "solliciteren", "contact"),
+}
+_REDEN_PER_RUBRIEK = {
+    "bedrijf": "informatie over het bedrijf, geen skill",
+    "sollicitatie": "sollicitatie-informatie, geen skill",
+    "aanbod": "arbeidsvoorwaarde, geen specifieke skill",
+}
+
+
+def _kopje(regel: str) -> str | None:
+    """Is deze regel een kopje? Geef dan de rubriek terug."""
+    schoon = regel.lower().strip(" ?:!")
+    if len(schoon.split()) > 6:
+        return None
+    for rubriek, kopjes in _KOPJES.items():
+        if any(schoon.startswith(k) for k in kopjes):
+            return rubriek
+    return None
 
 
 # Trefwoordenlijst van de mock: herkent veelvoorkomende skills in de drie pilotberoepen en
@@ -176,6 +199,17 @@ _KOPJES_ZONDER_SKILLS = ("over ons", "wie zijn wij", "over het bedrijf", "intere
 # Een echt AI-model heeft deze lijst niet nodig; dit is alleen om de mock bruikbaarder te maken.
 _MOCK_TREFWOORDEN = [
     (r"heftruck", "heftrucks bedienen"),
+    (r"laadt en lost|laden en lossen", "vracht lossen"),
+    (r"\bvca\b", "gezondheids- en veiligheidsnormen toepassen"),
+    (r"installaties aan\b|legt .*installaties", "elektrische en elektronische apparatuur installeren"),
+    (r"volgens tekening", "technische tekeningen lezen"),
+    (r"groepenkast|schakelmateriaal", "elektrische schakelaars installeren"),
+    (r"bekabeling", "stroomkabels installeren"),
+    (r"test en controleert", "elektrische apparatuur testen"),
+    (r"storingen", "storingen aan apparatuur oplossen"),
+    (r"werkbon", "gegevens over de voortgang van het werk bijhouden"),
+    (r"persoonlijke verzorging", "zorgen voor ouderen"),
+    (r"signaleert veranderingen", "gebruikers van gezondheidszorg observeren"),
     (r"binnenkomende goederen|goederen ontvangen", "goederen ontvangen"),
     (r"\borders?\b|order picking", "gelijktijdig meerdere orders uitvoeren"),
     (r"voorraad", "gegevens over voorraden bijhouden"),
@@ -202,31 +236,59 @@ _MOCK_TREFWOORDEN = [
 def _mock_extractie(tekst: str, signaalwoorden: list[str]) -> dict:
     """Neem elke opsommingsregel ('- ...') als bron voor skill-uitspraken.
 
-    Herkent de regel trefwoorden uit _MOCK_TREFWOORDEN, dan wordt elk trefwoord een
-    aparte uitspraak met een korte zoekterm. Anders wordt de kern van de zin gebruikt.
+    - Kopjes ("Wat vragen wij?") bepalen de rubriek van de regels eronder.
+    - Herkent de regel trefwoorden uit _MOCK_TREFWOORDEN, dan wordt elk trefwoord een
+      aparte uitspraak met een korte zoekterm. Anders wordt de kern van de zin gebruikt.
+    - Regels zonder skill (bedrijfsinformatie, arbeidsvoorwaarden) komen in "overgeslagen",
+      met de reden erbij.
     """
     regels = [r.strip() for r in tekst.splitlines()]
     titel = next((r for r in regels if r), "")
-    titel = re.split(r"[–\-(]", titel)[0].strip()
+    titel_kort = re.split(r"[–\-(]", titel)[0].strip()
 
-    uitspraken = []
+    uitspraken, overgeslagen = [], []
+    rubriek = "overig"
     for regel in regels:
+        if not regel:
+            continue
+        if regel == titel:
+            overgeslagen.append({"zin": regel, "reden": "functietitel (gebruikt om het ESCO-beroep te zoeken)"})
+            continue
+        nieuw = _kopje(regel)
+        if nieuw:
+            rubriek = nieuw
+            overgeslagen.append({"zin": regel, "reden": "kopje"})
+            continue
         if not regel.startswith(("-", "•", "*")):
+            overgeslagen.append({"zin": regel, "reden": _REDEN_PER_RUBRIEK.get(rubriek, "lopende tekst zonder skill")})
             continue
         zin = regel.lstrip("-•* ").strip()
         if not zin:
             continue
         gevonden = [w for w in signaalwoorden if re.search(rf"(?<!\w){re.escape(w)}(?!\w)", zin, re.IGNORECASE)]
         termen = [term for patroon, term in _MOCK_TREFWOORDEN if re.search(patroon, zin, re.IGNORECASE)]
+        # Bij het aanbod alleen iets opnemen als er een skill in staat die je leert
+        if rubriek == "aanbod" and not termen and not re.search(r"leiden je op|ingewerkt in", zin, re.IGNORECASE):
+            overgeslagen.append({"zin": zin, "reden": _REDEN_PER_RUBRIEK["aanbod"]})
+            continue
+        if rubriek in ("bedrijf", "sollicitatie"):
+            overgeslagen.append({"zin": zin, "reden": _REDEN_PER_RUBRIEK[rubriek]})
+            continue
         for term in termen or [_kern(zin)]:
-            uitspraken.append({"uitspraak": term, "bronzin": zin, "signaalwoorden": gevonden})
-    return {"functietitel": titel, "uitspraken": uitspraken}
+            uitspraken.append({
+                "uitspraak": term, "bronzin": zin, "signaalwoorden": gevonden,
+                "rubriek": rubriek if rubriek in ("taken", "eisen", "aanbod") else "overig",
+            })
+    return {"functietitel": titel_kort, "uitspraken": uitspraken, "overgeslagen": overgeslagen}
 
 
 def _kern(zin: str) -> str:
     """Maak een korte omschrijving van een zin (eerste deel, zonder aanloop)."""
     kort = re.split(r"[,.;(]", zin)[0]
     kort = re.sub(r"^(je|jij|wij|we)\s+(bent|hebt|kunt|werkt|leiden je op in|beschikt over)\s+", "", kort, flags=re.IGNORECASE)
+    # Aanloop en wens-woorden horen niet in de ESCO-zoekterm ("Ervaring met X is een pré" -> "X")
+    kort = re.sub(r"^(ervaring met|kennis van|affiniteit met)\s+(het\s+|de\s+)?", "", kort, flags=re.IGNORECASE)
+    kort = re.sub(r"\s+is\s+(een\s+)?(pré|pre|plus|mooi meegenomen)$", "", kort.strip(), flags=re.IGNORECASE)
     return kort.strip()[:80]
 
 
@@ -269,15 +331,16 @@ def _mock_classificatie(items: list[dict]) -> dict:
     keuzes = []
     for item in items:
         advies = item.get("regel_advies")
+        reden = item.get("regel_reden", "")
         if advies == "instroom":
             keuzes.append({
                 "nummer": item["nummer"], "categorie": "instroom", "betrouwbaarheid": "midden",
-                "toelichting": "De vacature noemt dit als harde eis (signaalwoord in de bronzin).",
+                "toelichting": f"De vacature stelt dit als eis bij de start ({reden}).",
             })
         elif advies == "on_the_job":
             keuzes.append({
                 "nummer": item["nummer"], "categorie": "on_the_job", "betrouwbaarheid": "midden",
-                "toelichting": "De vacature geeft aan dat dit geleerd kan worden of een pré is.",
+                "toelichting": f"De vacature geeft aan dat dit geleerd kan worden of een wens is ({reden}).",
             })
         else:
             keuzes.append({

@@ -4,6 +4,30 @@ Per versie: welk model, welke prompts, welke ESCO-versie, welke aannames en keuz
 
 ---
 
+## v0.2.0 — Feedback Troxler en "achter de schermen" (17 november 2026)
+
+### Aanleiding
+Feedback op v1 (gezien op de live site, die toen met de **mock** draaide, dus zonder AI):
+1. Het VCA-certificaat kwam niet in het profiel, het heftruckcertificaat wel.
+2. "Technische tekeningen lezen" werd on the job, terwijl de elektromonteur "volgens tekening" werkt en het bij het profiel staat.
+3. "Kennis van domotica is een pré" kwam erin, "ervaring met laadpalen is mooi meegenomen" niet.
+4. Voor het symposium: duidelijker laten zien wat er achter de schermen gebeurt en op basis van welke aannames zinnen wel of niet gekozen worden.
+
+### Wijzigingen
+- **Kopje telt mee (rubriek).** Elke uitspraak krijgt de rubriek van het kopje erboven: taken, eisen, aanbod of overig. Zonder signaalwoord geldt: *eisen* → instroom, *aanbod* → on the job, *taken* → geen advies. Signaalwoorden gaan altijd voor. Instelbaar via `rubrieken` in `config/classificatiekader.yaml`. Lost punt 2 op.
+- **Zinnen over dezelfde ESCO-skill vallen niet meer weg.** Voorheen bleef er per ESCO-skill één zin over en verdwenen de rest stilletjes. Nu worden alle zinnen bewaard (`extra_bronzinnen`) en samen beoordeeld (twijfel → on the job). Lost een deel van punt 3 op.
+- **Certificaten → onderliggende skill.** De extractieprompt vertaalt een certificaat naar de vaardigheid erachter (VCA → veiligheidsnormen toepassen); de mock kent VCA ook. Nieuwe on-the-job-signalen: "of je haalt het", "in de eerste maand" (logistiek: "VCA-basis is verplicht (of je haalt het in de eerste maand via ons)" = twijfel → on the job). Lost punt 1 op.
+- **Elke regel krijgt een verklaring.** De extractie geeft ook `overgeslagen` terug (zin + reden: kopje, bedrijfsinformatie, arbeidsvoorwaarde, sollicitatie). Per uitspraak bewaart de pijplijn de ESCO-kandidaten, de gekozen skill, het regeladvies met reden, het oordeel van het model en welk vangnet eventueel ingreep.
+- **Interface: drie tabbladen.** *Skillsprofiel* (met per skill "Hoe is dit besloten?"), *Achter de schermen* (de vacature regel voor regel, met kleur per uitkomst en waarom) en *Aannames van de tool* (de vaste regels en signaalwoorden). Lost punt 4 op.
+- **Skills en eisen zonder ESCO-skill** (bijv. diploma Verzorgende IG, BIG-registratie, laadpalen) staan met het regeladvies in een aparte lijst, zodat zichtbaar is dat ze wel in de vacature staan.
+- Export: extra kolommen `extra_bronzinnen`, `regel_reden`, `vangnet`.
+
+### Bekende beperking
+- ESCO v1.2 heeft geen skill voor laadpalen; met de mock wordt "ervaring met laadpalen" daarom "geen passende ESCO-skill" (nu wel zichtbaar, met uitleg). Een echt AI-model kan mogelijk een ruimere koppeling maken.
+- De voorbeeldresultaten in `data/precomputed/` zijn met de mock gemaakt. Draai `python scripts/precompute.py` opnieuw met `LLM_PROVIDER=anthropic` vóór het symposium.
+
+---
+
 ## v0.1.0 — MVP (november 2026)
 
 ### Configuratie

@@ -13,6 +13,9 @@ CSV_KOLOMMEN = [
     "toelichting",
     "betrouwbaarheid",
     "bronzin",
+    "extra_bronzinnen",
+    "regel_reden",
+    "vangnet",
     "door_mens_bevestigd",
 ]
 
@@ -35,6 +38,9 @@ def naar_json(profiel: Profiel) -> str:
                 "toelichting": s.toelichting,
                 "betrouwbaarheid": s.betrouwbaarheid,
                 "bronzin": s.bronzin,
+                "extra_bronzinnen": s.extra_bronzinnen,
+                "regel_reden": s.regel_reden,
+                "vangnet": s.vangnet,
                 "door_mens_bevestigd": s.door_mens_bevestigd,
             }
             for s in profiel.skills
@@ -58,6 +64,7 @@ def naar_csv(profiel: Profiel) -> str:
     for s in profiel.skills:
         schrijver.writerow([
             s.esco_label, s.esco_uri, s.categorie, s.toelichting, s.betrouwbaarheid, s.bronzin,
+            " | ".join(s.extra_bronzinnen), s.regel_reden, s.vangnet,
             "ja" if s.door_mens_bevestigd else "nee",
         ])
     return uitvoer.getvalue()
